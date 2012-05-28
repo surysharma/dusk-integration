@@ -3,6 +3,15 @@
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
+  <component name="FacetAutodetectingManager">
+    <autodetection-disabled>
+      <facet-type id="web">
+        <modules>
+          <module name="dusk-integration" />
+        </modules>
+      </facet-type>
+    </autodetection-disabled>
+  </component>
   <component name="IdProvider" IDEtalkID="F30E52EB51C3317630F91B248D225E18" />
   <component name="IvyIDEA.ProjectSettings">
     <option name="artifactTypeSettings">
