@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dusk-integration:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="hedgebenefits.war">
+      <element id="artifact" artifact-name="dusk-integration:war exploded" />
+    </root>
+  </artifact>
+</component>
