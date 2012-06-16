@@ -29,4 +29,12 @@ public class Admin {
         builder.append(getUserName());
         return builder.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("UserName:")
+                .append(userName)
+                .toString();
+    }
 }
