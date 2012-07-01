@@ -1,4 +1,4 @@
-package com.hedgebenefits.admin;
+package com.hedgebenefits.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
 import org.springframework.stereotype.Controller;
