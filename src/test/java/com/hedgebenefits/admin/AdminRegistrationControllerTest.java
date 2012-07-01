@@ -10,6 +10,7 @@ import static com.hedgebenefits.matchers.AdminModelAndViewMatcher.adminModelAndV
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class AdminRegistrationControllerTest {
 
@@ -21,7 +22,7 @@ public class AdminRegistrationControllerTest {
         ModelAndView modelAndView = adminRegistrationController.registerView();
 
         // then
-        ModelAndView expectedModelAndView = new ModelAndView("register");
+        ModelAndView expectedModelAndView = new ModelAndView("registration");
         expectedModelAndView.getModel().put("admin", new Admin());
         assertThat(modelAndView, is(adminModelAndView(expectedModelAndView)));
     }
