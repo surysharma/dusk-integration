@@ -1,7 +1,8 @@
 package com.hedgebenefits.services;
 
+import com.hedgebenefits.builders.AdminBuilder;
 import com.hedgebenefits.daos.AdminDao;
-import org.junit.Assert;
+import com.hedgebenefits.domain.Admin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,12 @@ public class AdminServiceTest {
     }
 
     @Test
-    public void should() {
-        Assert.fail("not yet implemented!!!");
+    public void shouldInvokeDao() {
+        // When
+        Admin admin = AdminBuilder.adminBuilder().withUsername().build();
+        adminService.register(admin);
+        // Then
     }
+
+
 }
