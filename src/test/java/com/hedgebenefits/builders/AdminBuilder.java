@@ -1,13 +1,13 @@
 package com.hedgebenefits.builders;
 
 import com.hedgebenefits.domain.Admin;
+import org.apache.commons.lang.RandomStringUtils;
 
-import java.util.Random;
 
 public class AdminBuilder {
 
-    private String username = Random.class.;
-    private String password;
+    private String username = RandomStringUtils.random(10);
+    private String password = RandomStringUtils.random(10);
 
     public static AdminBuilder adminBuilder() {
         return new AdminBuilder();

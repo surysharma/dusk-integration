@@ -34,7 +34,7 @@ public class AdminServiceTest {
     @Test
     public void shouldInvokeDao() {
         // When
-        Admin admin = AdminBuilder.adminBuilder().withUsername().build();
+        Admin admin = AdminBuilder.adminBuilder().build();
         adminService.register(admin);
         // Then
     }
