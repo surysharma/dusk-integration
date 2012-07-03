@@ -1,4 +1,4 @@
-package com.hedgebenefits.controllers.admin;
+package com.hedgebenefits.controllers.employee;
 
 import com.hedgebenefits.domain.Admin;
 import org.springframework.stereotype.Controller;
@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class AdminRegistrationController {
+public class EmployeeRegistrationController {
 
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/register/add")
     public ModelAndView registerView() {
         return new ModelAndView("registration").addObject("admin", new Admin());  //To change body of created methods use File | Settings | File Templates.
     }

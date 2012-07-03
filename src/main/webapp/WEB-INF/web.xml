@@ -12,7 +12,11 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <servlet>
-        <servlet-name>hedgebenefits</servlet-name>
+        <servlet-name>admin</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>employee</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
 
@@ -21,8 +25,12 @@
     </listener>
 
     <servlet-mapping>
-        <servlet-name>hedgebenefits</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employee</servlet-name>
+        <url-pattern>/employee/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
