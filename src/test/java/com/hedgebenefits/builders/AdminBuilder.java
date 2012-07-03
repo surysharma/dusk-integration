@@ -15,7 +15,7 @@ public class AdminBuilder {
 
     public Admin build() {
         Admin admin = new Admin();
-        admin.setUserName(this.username);
+        admin.setUsername(this.username);
         admin.setPassword(this.password);
         return admin;
     }

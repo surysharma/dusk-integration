@@ -6,15 +6,15 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 public class Admin {
 
     private Long id;
-    private String userName;
+    private String username;
     private String password;
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -40,14 +40,14 @@ public class Admin {
         }
         Admin otherAdmin  = (Admin) o;
         EqualsBuilder builder = new EqualsBuilder();
-        builder.append(getUserName(), otherAdmin.getUserName());
+        builder.append(getUsername(), otherAdmin.getUsername());
         return builder.isEquals();
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder builder = new HashCodeBuilder();
-        builder.append(getUserName());
+        builder.append(getUsername());
         return builder.hashCode();
     }
 
@@ -55,7 +55,7 @@ public class Admin {
     public String toString() {
         return new StringBuilder()
                 .append("UserName:")
-                .append(userName)
+                .append(username)
                 .toString();
     }
 }
