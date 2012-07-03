@@ -1,4 +1,4 @@
-package com.hedgebenefits.controllers.admin;
+package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
 import org.junit.Test;
