@@ -1,5 +1,7 @@
 package com.hedgebenefits.daos;
 
+import com.hedgebenefits.domain.Admin;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sureshsharma
@@ -8,5 +10,6 @@ package com.hedgebenefits.daos;
  * To change this template use File | Settings | File Templates.
  */
 public interface AdminDao {
-    
+
+    void save(Admin admin);
 }

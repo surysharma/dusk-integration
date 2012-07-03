@@ -1,14 +1,17 @@
 package com.hedgebenefits.services;
 
-import com.hedgebenefits.builders.AdminBuilder;
 import com.hedgebenefits.daos.AdminDao;
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.services.impl.AdminServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static com.hedgebenefits.builders.AdminBuilder.adminBuilder;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +27,7 @@ public class AdminServiceTest {
     private AdminDao adminDao;
 
     @InjectMocks
-    private AdminService adminService;
+    private AdminService adminService = new AdminServiceImpl(adminDao);
 
     @Before
     public void setup() {
@@ -34,9 +37,11 @@ public class AdminServiceTest {
     @Test
     public void shouldInvokeDao() {
         // When
-        Admin admin = AdminBuilder.adminBuilder().build();
+        Admin admin = adminBuilder().build();
         adminService.register(admin);
+
         // Then
+        verify(adminDao).save(admin);
     }
 
 
