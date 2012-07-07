@@ -8,10 +8,12 @@
                 <tr>
                     <td>Username:</td>
                     <td><form:input path="username"/></td>
+                    <td><form:errors path="username" cssStyle="color: red"/></td>
                 </tr>
                 <tr>
                     <td>password:</td>
                     <td><form:password path="password"/></td>
+                    <td><form:errors path="password" cssStyle="color: red"/></td>
                 </tr>
                     <td></td>
                     <td><input type="submit" value="Go"></td>

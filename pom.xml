@@ -7,7 +7,7 @@
     <groupId>hedgebenefits</groupId>
     <artifactId>hedgebenefits</artifactId>
     <version>1.0</version>
-<packaging>war</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
@@ -199,7 +199,12 @@
             <artifactId>jbehave-core</artifactId>
             <version>3.6.7</version>
         </dependency>
-                    
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.0.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -231,5 +236,5 @@
             </resource>
         </resources>
     </build>
-    
+
 </project>
