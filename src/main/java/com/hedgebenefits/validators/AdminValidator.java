@@ -1,6 +1,7 @@
 package com.hedgebenefits.validators;
 
 import com.hedgebenefits.domain.Admin;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -12,6 +13,7 @@ import org.springframework.validation.Validator;
  * Time: 18:08
  * To change this template use File | Settings | File Templates.
  */
+@Component
 public class AdminValidator implements Validator {
 
     @Override

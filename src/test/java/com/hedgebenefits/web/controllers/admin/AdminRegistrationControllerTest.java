@@ -10,12 +10,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static com.hedgebenefits.builders.AdminBuilder.adminBuilder;
 import static com.hedgebenefits.matchers.AdminModelAndViewMatcher.adminModelAndView;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,37 +39,7 @@ public class AdminRegistrationControllerTest {
         assertThat(modelAndView, is(adminModelAndView(expectedModelAndView)));
     }
 
-    @Test
-    public void shouldRegisterAndReturnToListView() {
-
-        //And
-        Admin admin = adminBuilder().build();
-
-        //when
-        String redirectedView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
-
-        //then
-        assertThat(redirectedView, is("redirect:list"));
-        //and
-        verify(sessionStatus).setComplete();
-    }
-
-    @Test
-    public void shouldReturnRegistrationViewIfError() {
-        //given
-        given(bindingResult.hasErrors()).willReturn(true);
-        //And
-        //And
-        Admin admin = adminBuilder().build();
-
-        //when
-        String registeredView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
-
-        //then
-        assertThat(registeredView, is(ADMIN_VIEWS.REGISTER_ADMIN.getViewName()));
-        //And
-        verify(redirectAttributes).addFlashAttribute("admin", admin);
-    }
+ 
 
     @Test
     public void shouldListRegisteredAdmins() {
