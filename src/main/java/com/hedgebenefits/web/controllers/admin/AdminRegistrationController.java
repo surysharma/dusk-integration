@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
+import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.REGISTER_ADMIN;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,13 +34,20 @@ public class AdminRegistrationController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("admin") Admin admin, BindingResult bindingResult, SessionStatus sessionStatus) {
+    public String register(@ModelAttribute("admin") Admin admin, BindingResult bindingResult,
+                                 SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("admin", admin);
+        redirectAttributes.addFlashAttribute("isRedirected", true);//In case the redirection does not happen this will never be set!!!
         if (bindingResult.hasErrors()) {
-            return new ModelAndView(REGISTRATION_VIEW);
+            return REGISTER_ADMIN.getViewName();
             
         }
         sessionStatus.setComplete();
-        ModelAndView modelAndView = new ModelAndView("redirect:/list");
-        return modelAndView;
+        return "redirect:list";
+    }
+
+    @RequestMapping(value = "/list")
+    public ModelAndView listRegisteredAdmins() {
+        return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
     }
 }

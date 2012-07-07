@@ -6,7 +6,8 @@
 <body>
 <table>
     <tr>
-        Registered!!!
+        Is Redirected:${isRedirected}
+        Registered ${admin.username}!!!
     </tr>
 </table>
 </body>
