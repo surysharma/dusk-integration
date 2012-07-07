@@ -1,8 +1,8 @@
 package com.hedgebenefits.validators;
 
 import com.hedgebenefits.domain.Admin;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
@@ -12,6 +12,7 @@ import org.springframework.validation.Validator;
  * Time: 18:08
  * To change this template use File | Settings | File Templates.
  */
+@Component
 public class AdminValidator implements Validator {
 
     @Override
@@ -22,7 +23,9 @@ public class AdminValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Admin admin = (Admin) target;
-        ValidationUtils.rejectIfEmpty(errors, "username", null, "Pl. enter username");
-        ValidationUtils.rejectIfEmpty(errors, "password", null, "Pl. enter password");
+        if ("islingi".equals(admin.getUsername())){
+            errors.rejectValue("username", null, "This user already exist's in the system.");
+        }
+
     }
 }

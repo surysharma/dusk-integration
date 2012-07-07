@@ -2,11 +2,14 @@ package com.hedgebenefits.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Admin {
 
     private Long id;
+    @NotBlank(message = "Username should not be null")
     private String username;
+    @NotBlank(message = "Username should not be null")
     private String password;
 
     public String getUsername() {
