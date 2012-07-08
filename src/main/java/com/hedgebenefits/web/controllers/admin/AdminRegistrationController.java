@@ -1,19 +1,22 @@
 package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.Right;
+import com.hedgebenefits.propertyeditors.RightsPropertyEditor;
 import com.hedgebenefits.validators.AdminValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.REGISTER_ADMIN;
@@ -54,8 +57,24 @@ public class AdminRegistrationController {
         return "redirect:list";
     }
 
+    @ModelAttribute("rights")
+    public List<Right> populateRights(){
+        List<Right> rights = new ArrayList<Right>();
+        rights.add(new Right("administrator"));
+        rights.add(new Right("company"));
+        rights.add(new Right("Employee"));
+
+        return rights;
+    }
     @RequestMapping(value = "/list")
     public ModelAndView listRegisteredAdmins() {
         return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
     }
+
+    @InitBinder
+    public void bind(WebDataBinder webDataBinder){
+        webDataBinder.setValidator(new LocalValidatorFactoryBean());
+        webDataBinder.registerCustomEditor(Right.class, "right", new RightsPropertyEditor());
+    }
+    
 }

@@ -12,6 +12,16 @@ public class Admin {
     @NotBlank(message = "Username should not be null")
     private String password;
 
+    private Right right;
+
+    public Right getRight() {
+        return right;
+    }
+
+    public void setRight(Right right) {
+        this.right = right;
+    }
+
     public String getUsername() {
         return username;
     }
