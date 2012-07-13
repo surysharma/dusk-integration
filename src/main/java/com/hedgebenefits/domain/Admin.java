@@ -7,9 +7,9 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Admin {
 
     private Long id;
-    @NotBlank(message = "Username should not be null")
+    @NotBlank(message = "Username cannot not be null")
     private String username;
-    @NotBlank(message = "Username should not be null")
+    @NotBlank(message = "Password cannot not be null")
     private String password;
 
     public String getUsername() {

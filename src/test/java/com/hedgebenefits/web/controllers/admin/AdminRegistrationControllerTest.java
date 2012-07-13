@@ -1,8 +1,10 @@
 package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.validators.AdminValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BindingResult;
@@ -21,15 +23,19 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AdminRegistrationControllerTest {
 
-    private AdminRegistrationController adminRegistrationController = new AdminRegistrationController();
     private static String REGISTRATION_VIEW = "registration";
-
     @Mock
     RedirectAttributes redirectAttributes;
+
     @Mock
     BindingResult bindingResult;
     @Mock
     SessionStatus sessionStatus;
+    @Mock
+    private AdminValidator adminValidator;
+    
+    @InjectMocks
+    private AdminRegistrationController adminRegistrationController = new AdminRegistrationController();
 
     @Test
     public void shouldRenderAdminRegistrationView() {
@@ -45,8 +51,10 @@ public class AdminRegistrationControllerTest {
     @Test
     public void shouldRegisterAndReturnToListView() {
 
-        //And
+        //Given
         Admin admin = adminBuilder().build();
+        //And
+        given(bindingResult.hasErrors()).willReturn(false);
 
         //when
         String redirectedView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
