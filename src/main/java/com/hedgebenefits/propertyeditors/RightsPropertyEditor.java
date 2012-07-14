@@ -24,6 +24,17 @@ public class RightsPropertyEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String rightStr) throws IllegalArgumentException {
+        if (rightStr != null && rightStr.equals("ADMIN")){
+            rightStr = "Adminstrator credential";
+        }
+        else if(rightStr != null && rightStr.equals("COMP")){
+            rightStr = "Computer credential";
+
+        }
+        else if(rightStr != null && rightStr.equals("EMP")){
+            rightStr = "Employee credential";
+
+        }
         setValue(new Right(rightStr));
     }
 

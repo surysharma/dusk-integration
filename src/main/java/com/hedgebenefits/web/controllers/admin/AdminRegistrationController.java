@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.REGISTER_ADMIN;
@@ -57,16 +57,22 @@ public class AdminRegistrationController {
     }
 
     @ModelAttribute("rights")
-    public List<Right> populateRights(){
-        List<Right> rights = new ArrayList<Right>();
-        rights.add(new Right("administrator"));
-        rights.add(new Right("company"));
-        rights.add(new Right("Employee"));
+    public Map<ADMIN_RIGHTS, String> populateRights(){
+        Map<ADMIN_RIGHTS, String> rights = new LinkedHashMap<ADMIN_RIGHTS, String>();
+        rights.put(ADMIN_RIGHTS.ADMIN, "administrator");
+        rights.put(ADMIN_RIGHTS.COMP,"company");
+        rights.put(ADMIN_RIGHTS.EMP,"Employee");
 
         return rights;
     }
+
     @RequestMapping(value = "/list")
     public ModelAndView listRegisteredAdmins() {
         return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    @InitBinder
+    public void bind(WebDataBinder webDataBinder) {
+        webDataBinder.registerCustomEditor(Right.class, "right", new RightsPropertyEditor());
     }
 }
