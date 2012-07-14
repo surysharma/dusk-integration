@@ -17,7 +17,7 @@ public class RightsPropertyEditor extends PropertyEditorSupport {
     public String getAsText() {
         Right right = (Right) getValue();
         if (right != null) {
-            return right.getName();
+            return right.getRight();
         }
         return super.getAsText();
     }

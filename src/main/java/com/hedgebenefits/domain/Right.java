@@ -1,5 +1,8 @@
 package com.hedgebenefits.domain;
 
+import javax.persistence.Embeddable;
+import java.io.Serializable;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sureshsharma
@@ -7,7 +10,8 @@ package com.hedgebenefits.domain;
  * Time: 00:53
  * To change this template use File | Settings | File Templates.
  */
-public class Right {
+@Embeddable
+public class Right implements Serializable {
 //    ADMIN("administrator"),
 //    COMPANY("Employer"),
 //    EMPLOYEE("employee");
@@ -17,8 +21,14 @@ public class Right {
         this.right = right;
     }
 
-    public String getName(){
+    protected Right(){}
+
+    public String getRight(){
         return right;
     }
 
+
+    public void setRight(String right) {
+        this.right = right;
+    }
 }

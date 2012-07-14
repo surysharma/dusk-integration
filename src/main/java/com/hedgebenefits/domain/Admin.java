@@ -4,43 +4,56 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="hb_admin")
+//TODO: Add a table generation strategy
+//@TableGenerator(name = "id_gen", table = "hb_index_table")
 public class Admin {
 
     private Long id;
     @NotBlank(message = "Username cannot not be null")
     private String username;
     @NotBlank(message = "Password cannot not be null")
-
     private String password;
 
     private Right right;
 
+    @Id
+    @GeneratedValue
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
+    public Long getId() {
+        return id;
+    }
+
+    @Embedded
+    @AttributeOverrides(@AttributeOverride(name = "right", column = @Column(name = "admin_right")))
     public Right getRight() {
         return right;
+    }
+
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
     }
 
     public void setRight(Right right) {
         this.right = right;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public void setId(Long id) {

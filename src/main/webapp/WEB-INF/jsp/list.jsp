@@ -7,7 +7,7 @@
 <table>
     <tr>
         Is Redirected:${isRedirected}
-        Registered ${admin.username} with ${admin.right.name}!!!
+        Registered ${admin.username} with ${admin.right.right}!!!
     </tr>
 </table>
 </body>

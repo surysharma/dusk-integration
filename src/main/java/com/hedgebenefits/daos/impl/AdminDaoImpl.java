@@ -2,6 +2,8 @@ package com.hedgebenefits.daos.impl;
 
 import com.hedgebenefits.daos.AdminDao;
 import com.hedgebenefits.domain.Admin;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,7 +15,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AdminDaoImpl implements AdminDao{
+
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public AdminDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public void save(Admin admin) {
+        sessionFactory.getCurrentSession().save(admin);
     }
 }
