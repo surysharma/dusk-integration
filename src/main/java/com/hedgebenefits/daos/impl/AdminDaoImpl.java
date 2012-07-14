@@ -15,6 +15,5 @@ import org.springframework.stereotype.Repository;
 public class AdminDaoImpl implements AdminDao{
     @Override
     public void save(Admin admin) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

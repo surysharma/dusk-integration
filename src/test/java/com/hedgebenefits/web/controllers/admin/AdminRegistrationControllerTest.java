@@ -1,6 +1,7 @@
 package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.services.AdminService;
 import com.hedgebenefits.validators.AdminValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,8 @@ public class AdminRegistrationControllerTest {
     SessionStatus sessionStatus;
     @Mock
     private AdminValidator adminValidator;
+    @Mock
+    private AdminService adminService;
     
     @InjectMocks
     private AdminRegistrationController adminRegistrationController = new AdminRegistrationController();

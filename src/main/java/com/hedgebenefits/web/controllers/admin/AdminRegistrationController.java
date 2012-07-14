@@ -3,6 +3,7 @@ package com.hedgebenefits.web.controllers.admin;
 import com.hedgebenefits.domain.Admin;
 import com.hedgebenefits.domain.Right;
 import com.hedgebenefits.propertyeditors.RightsPropertyEditor;
+import com.hedgebenefits.services.AdminService;
 import com.hedgebenefits.validators.AdminValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,9 @@ public class AdminRegistrationController {
     @Autowired
     private AdminValidator validator;
 
+    @Autowired
+    private AdminService adminService;
+
     @RequestMapping(value = "/register")
     public ModelAndView registerView() {
         return new ModelAndView(REGISTRATION_VIEW).addObject("admin", new Admin());
@@ -53,6 +57,7 @@ public class AdminRegistrationController {
             
         }
         sessionStatus.setComplete();
+        adminService.register(admin);
         return "redirect:list";
     }
 
