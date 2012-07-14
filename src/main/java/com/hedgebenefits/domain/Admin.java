@@ -10,6 +10,7 @@ public class Admin {
     @NotBlank(message = "Username cannot not be null")
     private String username;
     @NotBlank(message = "Password cannot not be null")
+
     private String password;
 
     private Right right;

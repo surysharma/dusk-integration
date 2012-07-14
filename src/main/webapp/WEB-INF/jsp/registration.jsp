@@ -15,16 +15,11 @@
                     <td><form:password path="password"/></td>
                     <td><form:errors path="password" cssStyle="color: red"/></td>
                 </tr>
-
-
                     <form:select path="right" >
                     <form:options items="${rights}"/>
                     </form:select>
-                
-
-
                 </tr>
-                </tr>
+                <tr>
                     <td></td>
                     <td><input type="submit" value="Go"></td>
                 </tr>
