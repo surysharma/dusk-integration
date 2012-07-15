@@ -1,4 +1,5 @@
 target
 */workspace.xml
 *.iml
+**/gradle.xml
 *.iws

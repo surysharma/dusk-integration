@@ -1,9 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-
+    <import resource="daoContext.xml"/>
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="packagesToScan" value="com.hedgebenefits.domain"/>
         <property name="dataSource" ref="dataSource"/>
@@ -12,8 +11,9 @@
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
                 hibernate.show_sql=true
+                hibernate.hbm2ddl.auto=create
             </value>
         </property>
     </bean>
-
+    
 </beans>

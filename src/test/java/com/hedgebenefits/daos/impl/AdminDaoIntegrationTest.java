@@ -24,7 +24,7 @@ import static junit.framework.Assert.assertNull;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/daoContext.xml")
+@ContextConfiguration("/test-applicationContext.xml")
 @Transactional
 public class AdminDaoIntegrationTest {
 
