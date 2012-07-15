@@ -12,4 +12,8 @@ import com.hedgebenefits.domain.Admin;
 public interface AdminDao {
 
     void save(Admin admin);
+
+    boolean isExistingUser(Admin admin);
+
+    void updateExisting(Admin admin);
 }

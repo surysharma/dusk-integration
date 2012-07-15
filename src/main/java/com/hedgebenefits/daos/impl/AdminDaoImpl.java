@@ -27,4 +27,15 @@ public class AdminDaoImpl implements AdminDao{
     public void save(Admin admin) {
         sessionFactory.getCurrentSession().save(admin);
     }
+
+    @Override
+    public boolean isExistingUser(Admin admin) {
+        return sessionFactory.getCurrentSession().get(Admin.class, admin.getId()) != null ? true: false;
+
+    }
+
+    @Override
+    public void updateExisting(Admin admin) {
+        sessionFactory.getCurrentSession().update(admin);
+    }
 }

@@ -9,12 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,28 +37,82 @@ public class AdminDaoIntegrationTest {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     private AdminDao adminDao;
+
+    private Session session;
 
     @Before
     public void setUp() throws Exception {
         adminDao = new AdminDaoImpl(sessionFactory);
+        session = sessionFactory.getCurrentSession();
     }
 
     @Test
     public void shouldSaveNewAdmin() {
         //given
-        Session session = sessionFactory.getCurrentSession();
         Admin admin = new Admin();
         admin.setUsername("someuser");
         admin.setPassword("somepassword");
         admin.setRight(new Right("admin"));
         assertNull(admin.getId());
 
+        //and
+
         //when
         adminDao.save(admin);
         session.flush();
 
         //then
-        assertNotNull(admin.getId());
+        List<Map<String,Object>> adminTableItems = jdbcTemplate.queryForList("select * from hb_admin");
+        Map<String, Object> row = adminTableItems.get(0);
+        assertNotNull(row.get("id"));
     }
+
+    @Test
+    public void shouldTellIfAdminWithUsernameAlreadyExists() {
+        //given
+        jdbcTemplate.update("insert into hb_admin (id, password, admin_right, username) values(?, ?, ?, ?)",
+                1, "trsgt", "admin", "someuser");
+
+        //and
+        Admin admin = new Admin();
+        admin.setId(1L);
+        admin.setUsername("someuser");
+        admin.setPassword("somepassword");
+        admin.setRight(new Right("admin"));
+
+        //when
+        assertThat(adminDao.isExistingUser(admin), is(true));
+    }
+
+    @Test
+    public void shouldUpdateAnExistingAdmin() {
+        //given
+        jdbcTemplate.update("insert into hb_admin (id, password, admin_right, username) values(?, ?, ?, ?)",
+                1, "trsgt", "admin1", "someuser1");
+        jdbcTemplate.update("insert into hb_admin (id, password, admin_right, username) values(?, ?, ?, ?)",
+                2, "trsgt", "admin2", "someuser2");
+
+        //and
+        Admin admin = new Admin();
+        admin.setId(2L);
+        admin.setUsername("someuser2");
+        admin.setPassword("somepassword2");
+        //and the right is changed
+        admin.setRight(new Right("company2"));
+
+        //when
+        adminDao.updateExisting(admin);
+        session.flush();
+
+        //then
+        List<Map<String, Object>> adminTableItems = jdbcTemplate.queryForList("select * from hb_admin");
+        String right = (String) adminTableItems.get(1).get("admin_right");
+        assertThat(right, is("company2"));
+    }
+
+
 }
