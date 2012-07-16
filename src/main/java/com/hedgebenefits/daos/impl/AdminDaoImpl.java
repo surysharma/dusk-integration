@@ -6,6 +6,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sureshsharma
@@ -37,5 +42,13 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public void updateExisting(Admin admin) {
         sessionFactory.getCurrentSession().update(admin);
+    }
+
+    @Override
+    public Set<Admin> listAllAdmins() {
+        List<Admin> adminList = sessionFactory.getCurrentSession().createCriteria(Admin.class)
+                .setMaxResults(5)
+                .list();
+        return newHashSet(adminList);
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
@@ -57,6 +58,7 @@ public class AdminDaoIntegrationTest {
         admin.setUsername("someuser");
         admin.setPassword("somepassword");
         admin.setRight(new Right("admin"));
+
         assertNull(admin.getId());
 
         //and
@@ -83,6 +85,7 @@ public class AdminDaoIntegrationTest {
         admin.setUsername("someuser");
         admin.setPassword("somepassword");
         admin.setRight(new Right("admin"));
+
 
         //when
         assertThat(adminDao.isExistingUser(admin), is(true));
@@ -114,5 +117,44 @@ public class AdminDaoIntegrationTest {
         assertThat(right, is("company2"));
     }
 
+    @Test
+    public void shouldListAllAdmins() {
+        //given
+        givenAnExistingAdminWith(1, "admin1", "pass1", "admin");
+        givenAnExistingAdminWith(2, "admin2", "pass2", "admin");
+        givenAnExistingAdminWith(3, "admin3", "pass3", "admin");
+
+        //when
+        Set<Admin> admins = adminDao.listAllAdmins();
+        session.flush();
+
+        //then
+        assertThat(admins.size(), is(3));
+    }
+
+    @Test
+    public void shouldListFirstFiveAdmins() {
+        //given
+        givenAnExistingAdminWith(1, "admin1", "pass1", "admin");
+        givenAnExistingAdminWith(2, "admin2", "pass2", "admin");
+        givenAnExistingAdminWith(3, "admin3", "pass3", "admin");
+        givenAnExistingAdminWith(4, "admin4", "pass4", "admin");
+        givenAnExistingAdminWith(5, "admin5", "pass5", "admin");
+        givenAnExistingAdminWith(6, "admin6", "pass6", "admin");
+        givenAnExistingAdminWith(7, "admin7", "pass7", "admin");
+
+        //when
+        Set<Admin> admins = adminDao.listAllAdmins();
+        session.flush();
+
+        //then
+        assertThat(admins.size(), is(5));
+    }
+
+
+
+    private void givenAnExistingAdminWith(int id, String username, String password, String right) {
+        jdbcTemplate.update("insert into hb_admin (id, password, admin_right, username) values (?,?,?,?)", id, username, password, right);
+    }
 
 }

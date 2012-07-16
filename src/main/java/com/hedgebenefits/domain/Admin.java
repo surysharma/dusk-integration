@@ -20,6 +20,15 @@ public class Admin {
 
     private Right right;
 
+    public Admin(String username, String password, Right right) {
+        this.username = username;
+        this.password = password;
+        this.right = right;
+    }
+
+    //For Hibernate
+    public Admin() {}
+
     @Id
     @GeneratedValue
 //    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
@@ -68,6 +77,8 @@ public class Admin {
         Admin otherAdmin  = (Admin) o;
         EqualsBuilder builder = new EqualsBuilder();
         builder.append(getUsername(), otherAdmin.getUsername());
+        builder.append(getPassword(), otherAdmin.getPassword());
+        builder.append(getRight(), otherAdmin.getRight());
         return builder.isEquals();
     }
 
@@ -75,6 +86,8 @@ public class Admin {
     public int hashCode() {
         HashCodeBuilder builder = new HashCodeBuilder();
         builder.append(getUsername());
+        builder.append(getPassword());
+        builder.append(getRight());
         return builder.hashCode();
     }
 
@@ -83,6 +96,8 @@ public class Admin {
         return new StringBuilder()
                 .append("UserName:")
                 .append(username)
+                .append("Right:")
+                .append(right)
                 .toString();
     }
 }

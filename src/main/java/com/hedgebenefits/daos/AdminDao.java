@@ -2,6 +2,8 @@ package com.hedgebenefits.daos;
 
 import com.hedgebenefits.domain.Admin;
 
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sureshsharma
@@ -16,4 +18,6 @@ public interface AdminDao {
     boolean isExistingUser(Admin admin);
 
     void updateExisting(Admin admin);
+
+    Set<Admin> listAllAdmins();
 }
