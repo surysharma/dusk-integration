@@ -2,6 +2,8 @@ package com.hedgebenefits.services;
 
 import com.hedgebenefits.domain.Admin;
 
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  * User: sureshsharma
@@ -11,4 +13,6 @@ import com.hedgebenefits.domain.Admin;
  */
 public interface AdminService {
     void register(Admin admin);
+    Set<Admin> listAllAdmins();
+
 }

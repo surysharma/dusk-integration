@@ -3,6 +3,9 @@ package com.hedgebenefits.web.controllers.admin;
 import com.hedgebenefits.domain.Admin;
 import com.hedgebenefits.services.AdminService;
 import com.hedgebenefits.validators.AdminValidator;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,8 +16,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 import static com.hedgebenefits.builders.AdminBuilder.adminBuilder;
 import static com.hedgebenefits.matchers.AdminModelAndViewMatcher.adminModelAndView;
+import static com.hedgebenefits.web.controllers.admin.AdminRegistrationControllerTest.AdminMatcher.equalsExpected;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -94,5 +101,32 @@ public class AdminRegistrationControllerTest {
 
         //then
         assertThat(listModelAndView.getViewName(), is(ADMIN_VIEWS.LIST_ADMINS.getViewName()));
+        //and
+        Set<Admin> admins = newHashSet();
+        assertThat(listModelAndView.getModelMap().get("admins"), equalsExpected(admins));
+    }
+
+
+    static class AdminMatcher extends TypeSafeMatcher<Admin> {
+
+
+        private static Set<Admin> expectedAdmins;
+
+        public static Matcher<Object> equalsExpected(Set<Admin> expectedAdmins) {
+            AdminMatcher.expectedAdmins = expectedAdmins;
+            return null;  //To change body of created methods use File | Settings | File Templates.
+        }
+
+        @Override
+        public boolean matchesSafely(Admin admin) {
+
+            return false;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override
+        public void describeTo(Description description) {
+
+
+        }
     }
 }

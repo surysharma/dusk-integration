@@ -6,6 +6,8 @@ import com.hedgebenefits.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -20,5 +22,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void register(Admin admin) {
         adminDao.save(admin);
+    }
+
+    @Override
+    public Set<Admin> listAllAdmins() {
+        return adminDao.listAllAdmins();
     }
 }
