@@ -5,6 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="hb_admin")
@@ -18,7 +19,10 @@ public class Admin {
     @NotBlank(message = "Password cannot not be null")
     private String password;
 
+    
+
     private Right right;
+    private List<Sector> sectors;
 
     public Admin(String username, String password, Right right) {
         this.username = username;
@@ -67,6 +71,16 @@ public class Admin {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_fk")
+    public List<Sector> getSectors() {
+        return sectors;
+    }
+
+    public void setSectors(List<Sector> sectors) {
+        this.sectors= sectors;
     }
 
     @Override
