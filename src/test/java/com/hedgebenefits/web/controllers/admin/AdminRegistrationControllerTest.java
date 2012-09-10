@@ -29,6 +29,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class AdminRegistrationControllerTest {
 
@@ -94,7 +95,6 @@ public class AdminRegistrationControllerTest {
     }
 
     @Test
-    @Ignore
     public void shouldListRegisteredAdmins() {
         //given
 

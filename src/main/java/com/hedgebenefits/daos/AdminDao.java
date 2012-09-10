@@ -2,7 +2,7 @@ package com.hedgebenefits.daos;
 
 import com.hedgebenefits.domain.Admin;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,5 +19,5 @@ public interface AdminDao {
 
     void updateExisting(Admin admin);
 
-    Set<Admin> listAllAdmins();
+    List<Admin> listAllAdmins();
 }

@@ -2,6 +2,7 @@ package com.hedgebenefits.services;
 
 import com.hedgebenefits.domain.Admin;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,6 +14,6 @@ import java.util.Set;
  */
 public interface AdminService {
     void register(Admin admin);
-    Set<Admin> listAllAdmins();
+    List<Admin> listAllAdmins();
 
 }

@@ -6,16 +6,16 @@
 
 <body>
 <table>
-    <tr>
-        Is Redirected:${isRedirected}
-        Registered ${admin.username} with ${admin.right.right}!!!
-    </tr>
+
     <tr>
         The list is :
         <td>
+        <c:forEach var="admin" items="${admins}">
+            Admin is ${admin.username},
             <c:forEach var="sector" items="${admin.sectors}">
                 sector is ${sector.name}
             </c:forEach>
+        </c:forEach>
         </td>
     </tr>
 </table>

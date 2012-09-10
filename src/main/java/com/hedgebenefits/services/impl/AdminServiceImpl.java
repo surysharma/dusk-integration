@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -41,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Set<Admin> listAllAdmins() {
+    public List<Admin> listAllAdmins() {
         return adminDao.listAllAdmins();
     }
 }

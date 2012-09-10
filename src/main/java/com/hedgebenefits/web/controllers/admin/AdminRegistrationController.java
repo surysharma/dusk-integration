@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
@@ -58,7 +59,8 @@ public class AdminRegistrationController {
         }
         sessionStatus.setComplete();
         adminService.register(admin);
-        return "redirect:list";
+        admin.setUsername("Santa");
+        return "redirect:confirm";
     }
 
     @ModelAttribute("rights")
@@ -71,9 +73,15 @@ public class AdminRegistrationController {
         return rights;
     }
 
+    @RequestMapping(value = "/confirm")
+    public ModelAndView showConfirmation() {
+        return new ModelAndView("confirm");  //To change body of created methods use File | Settings | File Templates.
+    }
+
     @RequestMapping(value = "/list")
     public ModelAndView listRegisteredAdmins() {
-        return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
+        List<Admin> admins = adminService.listAllAdmins();
+        return new ModelAndView(LIST_ADMINS.getViewName()).addObject("admins", admins);  //To change body of created methods use File | Settings | File Templates.
     }
 
     @InitBinder
