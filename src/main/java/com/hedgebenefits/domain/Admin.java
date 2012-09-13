@@ -35,6 +35,7 @@ public class Admin {
 
     @Id
     @GeneratedValue
+    @Column(name = "admin_id")
 //    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
     public Long getId() {
         return id;
@@ -73,7 +74,7 @@ public class Admin {
         this.id = id;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "admin_fk")
     public List<Sector> getSectors() {
         return sectors;
