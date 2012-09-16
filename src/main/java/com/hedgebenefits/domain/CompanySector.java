@@ -10,7 +10,8 @@ import javax.persistence.*;
 @Table(name="company_sector")
 public class CompanySector {
     private Long id;
-    private String name;
+
+    private Sector sector;
 
     private Company company;
 
@@ -21,13 +22,14 @@ public class CompanySector {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @ManyToOne
+    @JoinColumn(name = "sector_id")
+    public Sector getSector() {
+        return sector;
     }
 
-    @Column(name = "company_sector_name")
-    public String getName() {
-        return name;
+    public void setSector(Sector sector) {
+        this.sector = sector;
     }
 
     @ManyToOne
@@ -50,7 +52,7 @@ public class CompanySector {
     public int hashCode() {
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
         return hashCodeBuilder
-                .append(name)
+                .append(sector)
                 .append(company)
                 .hashCode();
     }
@@ -63,7 +65,7 @@ public class CompanySector {
         }
         CompanySector companySector = (CompanySector)o;
         return equalsBuilder
-                .append(name, companySector.getName())
+                .append(sector, companySector.getSector())
                 .append(company, companySector.getCompany())
             .isEquals();
     }

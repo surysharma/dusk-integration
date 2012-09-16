@@ -16,7 +16,6 @@ public class Company {
     private Long id;
     @NotBlank(message = "Username cannot not be null")
     private String username;
-    @NotBlank(message = "Password cannot not be null")
     private String password;
 
     
