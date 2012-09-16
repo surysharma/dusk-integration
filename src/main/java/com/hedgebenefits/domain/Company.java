@@ -21,7 +21,7 @@ public class Company {
 
     
 
-    private List<Sector> sectors;
+    private List<CompanySector> companySectors;
 
 
     //For Hibernate
@@ -58,14 +58,13 @@ public class Company {
         this.id = id;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "company_fk")
-    public List<Sector> getSectors() {
-        return sectors;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company", orphanRemoval = true)
+    public List<CompanySector> getCompanySectors() {
+        return companySectors;
     }
 
-    public void setSectors(List<Sector> sectors) {
-        this.sectors= sectors;
+    public void setCompanySectors(List<CompanySector> companySectors) {
+        this.companySectors= companySectors;
     }
 
     @Override
@@ -77,7 +76,7 @@ public class Company {
         EqualsBuilder builder = new EqualsBuilder();
         builder.append(username, otherCompany.getUsername());
         builder.append(password, otherCompany.getPassword());
-        builder.append(sectors, otherCompany.getSectors());
+        builder.append(companySectors, otherCompany.getCompanySectors());
         return builder.isEquals();
     }
 
@@ -86,7 +85,7 @@ public class Company {
         HashCodeBuilder builder =
                 new HashCodeBuilder()
                         .append(username)
-                        .append(sectors)
+                        .append(companySectors)
                         .append(password);
         return builder.hashCode();
     }

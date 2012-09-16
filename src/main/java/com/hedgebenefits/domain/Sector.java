@@ -7,7 +7,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import javax.persistence.*;
 
 @Entity
-@Table(name="hb_sector")
+@Table(name="sector")
 public class Sector {
     private Long id;
     private String name;
@@ -23,7 +23,7 @@ public class Sector {
         this.name = name;
     }
 
-    @Column(name = "hb_sector")
+    @Column(name = "sector_name")
     public String getName() {
         return name;
     }
