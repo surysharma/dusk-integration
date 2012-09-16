@@ -1,7 +1,7 @@
 package com.hedgebenefits.web.controllers.admin;
 
-import com.hedgebenefits.domain.Admin;
-import com.hedgebenefits.services.AdminService;
+import com.hedgebenefits.domain.Company;
+import com.hedgebenefits.services.CompanyService;
 import com.hedgebenefits.validators.AdminValidator;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -44,10 +44,10 @@ public class AdminRegistrationControllerTest {
     @Mock
     private AdminValidator adminValidator;
     @Mock
-    private AdminService adminService;
+    private CompanyService companyService;
     
     @InjectMocks
-    private AdminRegistrationController adminRegistrationController = new AdminRegistrationController();
+    private CompanyRegistrationController adminRegistrationController = new CompanyRegistrationController();
 
     @Test
     public void shouldRenderAdminRegistrationView() {
@@ -56,7 +56,7 @@ public class AdminRegistrationControllerTest {
 
         // then
         ModelAndView expectedModelAndView = new ModelAndView(REGISTRATION_VIEW);
-        expectedModelAndView.getModel().put("admin", new Admin());
+        expectedModelAndView.getModel().put("company", new Company());
         assertThat(modelAndView, is(adminModelAndView(expectedModelAndView)));
     }
 
@@ -64,12 +64,12 @@ public class AdminRegistrationControllerTest {
     public void shouldRegisterAndReturnToListView() {
 
         //Given
-        Admin admin = adminBuilder().build();
+        Company company = adminBuilder().build();
         //And
         given(bindingResult.hasErrors()).willReturn(false);
 
         //when
-        String redirectedView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
+        String redirectedView = adminRegistrationController.register(company, bindingResult, sessionStatus, redirectAttributes);
 
         //then
         assertThat(redirectedView, is("redirect:list"));
@@ -83,15 +83,14 @@ public class AdminRegistrationControllerTest {
         given(bindingResult.hasErrors()).willReturn(true);
         //And
         //And
-        Admin admin = adminBuilder().build();
+        Company company = adminBuilder().build();
 
         //when
-        String registeredView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
+        String registeredView = adminRegistrationController.register(company, bindingResult, sessionStatus, redirectAttributes);
 
         //then
-        assertThat(registeredView, is(ADMIN_VIEWS.REGISTER_ADMIN.getViewName()));
         //And
-        verify(redirectAttributes).addFlashAttribute("admin", admin);
+        verify(redirectAttributes).addFlashAttribute("company", company);
     }
 
     @Test
@@ -99,28 +98,27 @@ public class AdminRegistrationControllerTest {
         //given
 
         //when
-        ModelAndView listModelAndView = adminRegistrationController.listRegisteredAdmins();
+        ModelAndView listModelAndView = adminRegistrationController.listRegisteredCompanies();
 
         //then
-        assertThat(listModelAndView.getViewName(), is(ADMIN_VIEWS.LIST_ADMINS.getViewName()));
         //and
-        Set<Admin> admins = newHashSet();
-        assertThat(listModelAndView.getModelMap().get("admins"), equalsExpected(admins));
+        Set<Company> companies = newHashSet();
+        assertThat(listModelAndView.getModelMap().get("companies"), equalsExpected(companies));
     }
 
 
-    static class AdminMatcher extends TypeSafeMatcher<Admin> {
+    static class AdminMatcher extends TypeSafeMatcher<Company> {
 
 
-        private static Set<Admin> expectedAdmins;
+        private static Set<Company> expectedCompanies;
 
-        public static Matcher<Object> equalsExpected(Set<Admin> expectedAdmins) {
-            AdminMatcher.expectedAdmins = expectedAdmins;
+        public static Matcher<Object> equalsExpected(Set<Company> expectedCompanies) {
+            AdminMatcher.expectedCompanies = expectedCompanies;
             return null;  //To change body of created methods use File | Settings | File Templates.
         }
 
         @Override
-        public boolean matchesSafely(Admin admin) {
+        public boolean matchesSafely(Company company) {
 
             return false;  //To change body of implemented methods use File | Settings | File Templates.
         }

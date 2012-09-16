@@ -1,8 +1,8 @@
 package com.hedgebenefits.services;
 
-import com.hedgebenefits.daos.AdminDao;
-import com.hedgebenefits.domain.Admin;
-import com.hedgebenefits.services.impl.AdminServiceImpl;
+import com.hedgebenefits.daos.CompanyDao;
+import com.hedgebenefits.domain.Company;
+import com.hedgebenefits.services.impl.CompanyServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +21,13 @@ import static org.mockito.Mockito.verify;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AdminServiceTest {
+public class CompanyServiceTest {
 
     @Mock
-    private AdminDao adminDao;
+    private CompanyDao companyDao;
 
     @InjectMocks
-    private AdminService adminService = new AdminServiceImpl(adminDao);
+    private CompanyService companyService = new CompanyServiceImpl(companyDao);
 
     @Before
     public void setup() {
@@ -37,11 +37,11 @@ public class AdminServiceTest {
     @Test
     public void shouldInvokeDao() {
         // When
-        Admin admin = adminBuilder().build();
-        adminService.register(admin);
+        Company company = adminBuilder().build();
+        companyService.register(company);
 
         // Then
-        verify(adminDao).save(admin);
+        verify(companyDao).save(company);
     }
 
 

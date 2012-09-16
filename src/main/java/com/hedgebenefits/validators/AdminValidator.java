@@ -1,6 +1,6 @@
 package com.hedgebenefits.validators;
 
-import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.Company;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -17,13 +17,13 @@ public class AdminValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Admin.class.equals(clazz);  //To change body of implemented methods use File | Settings | File Templates.
+        return Company.class.equals(clazz);  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        Admin admin = (Admin) target;
-        if ("islingi".equals(admin.getUsername())){
+        Company company = (Company) target;
+        if ("islingi".equals(company.getUsername())){
             errors.rejectValue("username", null, "This user already exist's in the system.");
         }
 

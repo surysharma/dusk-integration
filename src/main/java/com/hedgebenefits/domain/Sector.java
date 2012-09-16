@@ -32,9 +32,7 @@ public class Sector {
         this.id = id;
     }
 
-    public Sector() {
-        super();    //To change body of overridden methods use File | Settings | File Templates.
-    }
+    public Sector() {}
 
     @Override
     public int hashCode() {

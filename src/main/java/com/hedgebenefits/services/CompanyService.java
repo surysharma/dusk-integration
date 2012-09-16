@@ -1,9 +1,8 @@
 package com.hedgebenefits.services;
 
-import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.Company;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,8 +11,8 @@ import java.util.Set;
  * Time: 21:00
  * To change this template use File | Settings | File Templates.
  */
-public interface AdminService {
-    void register(Admin admin);
-    List<Admin> listAllAdmins();
+public interface CompanyService {
+    void register(Company company);
+    List<Company> listAllCompanies();
 
 }

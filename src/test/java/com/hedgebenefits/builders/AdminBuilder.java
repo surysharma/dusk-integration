@@ -1,6 +1,6 @@
 package com.hedgebenefits.builders;
 
-import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.Company;
 import org.apache.commons.lang.RandomStringUtils;
 
 
@@ -13,11 +13,11 @@ public class AdminBuilder {
         return new AdminBuilder();
     }
 
-    public Admin build() {
-        Admin admin = new Admin();
-        admin.setUsername(this.username);
-        admin.setPassword(this.password);
-        return admin;
+    public Company build() {
+        Company company = new Company();
+        company.setUsername(this.username);
+        company.setPassword(this.password);
+        return company;
     }
 
     public AdminBuilder withUsername(String username) {

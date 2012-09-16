@@ -8,10 +8,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="hb_admin")
+@Table(name="company")
 //TODO: Add a table generation strategy
 //@TableGenerator(name = "id_gen", table = "hb_index_table")
-public class Admin {
+public class Company {
 
     private Long id;
     @NotBlank(message = "Username cannot not be null")
@@ -21,31 +21,19 @@ public class Admin {
 
     
 
-    private Right right;
     private List<Sector> sectors;
 
-    public Admin(String username, String password, Right right) {
-        this.username = username;
-        this.password = password;
-        this.right = right;
-    }
 
     //For Hibernate
-    public Admin() {}
+    public Company() {}
 
     @Id
     @GeneratedValue
-    @Column(name = "admin_id")
-//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id_gen")
+    @Column(name = "company_id")
     public Long getId() {
         return id;
     }
 
-    @Embedded
-    @AttributeOverrides(@AttributeOverride(name = "right", column = @Column(name = "admin_right")))
-    public Right getRight() {
-        return right;
-    }
 
     @Column(name = "username")
     public String getUsername() {
@@ -55,10 +43,6 @@ public class Admin {
     @Column(name = "password")
     public String getPassword() {
         return password;
-    }
-
-    public void setRight(Right right) {
-        this.right = right;
     }
 
     public void setUsername(String username) {
@@ -75,7 +59,7 @@ public class Admin {
     }
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "admin_fk")
+    @JoinColumn(name = "company_fk")
     public List<Sector> getSectors() {
         return sectors;
     }
@@ -86,33 +70,25 @@ public class Admin {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Admin)) {
+        if (!(o instanceof Company)) {
             return false;
         }
-        Admin otherAdmin  = (Admin) o;
+        Company otherCompany = (Company) o;
         EqualsBuilder builder = new EqualsBuilder();
-        builder.append(getUsername(), otherAdmin.getUsername());
-        builder.append(getPassword(), otherAdmin.getPassword());
-        builder.append(getRight(), otherAdmin.getRight());
+        builder.append(username, otherCompany.getUsername());
+        builder.append(password, otherCompany.getPassword());
+        builder.append(sectors, otherCompany.getSectors());
         return builder.isEquals();
     }
 
     @Override
     public int hashCode() {
-        HashCodeBuilder builder = new HashCodeBuilder();
-        builder.append(getUsername());
-        builder.append(getPassword());
-        builder.append(getRight());
+        HashCodeBuilder builder =
+                new HashCodeBuilder()
+                        .append(username)
+                        .append(sectors)
+                        .append(password);
         return builder.hashCode();
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder()
-                .append("UserName:")
-                .append(username)
-                .append("Right:")
-                .append(right)
-                .toString();
-    }
 }

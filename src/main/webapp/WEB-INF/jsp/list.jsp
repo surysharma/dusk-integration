@@ -8,15 +8,9 @@
 <table>
 
     <tr>
-        The list is :
+        The list will come here:
         <td>
-        <c:forEach var="admin" items="${admins}">
-            Admin is ${admin.username},
-            <c:forEach var="sector" items="${admin.sectors}">
-                sector is ${sector.name}
-            </c:forEach>
-        </c:forEach>
-        </td>
+
     </tr>
 </table>
 </body>
