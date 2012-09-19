@@ -1,15 +1,18 @@
 package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.AdminSector;
+import com.hedgebenefits.domain.Sector;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.REGISTER_ADMIN;
@@ -30,7 +33,36 @@ public class AdminRegistrationController {
 
     @RequestMapping(value = "/register")
     public ModelAndView registerView() {
-        return new ModelAndView(REGISTRATION_VIEW).addObject("admin", new Admin());
+        ModelAndView modelAndView = new ModelAndView(REGISTRATION_VIEW);
+        return modelAndView.addObject("admin", new Admin());
+    }
+
+    @ModelAttribute(value = "sectors")
+    public List<Sector> populateSectors(){
+        List<Sector> sectors = new ArrayList();
+        Sector sector1= new Sector();
+        sector1.setId(21L);
+        sector1.setSectorName("Agriculture");
+
+        Sector sector2= new Sector();
+        sector2.setId(22L);
+        sector2.setSectorName("Health");
+
+        Sector sector3= new Sector();
+        sector3.setId(23L);
+        sector3.setSectorName("IT");
+
+        Sector sector4= new Sector();
+        sector4.setId(24L);
+        sector4.setSectorName("Finance");
+
+        sectors.add(sector1);
+        sectors.add(sector2);
+        sectors.add(sector3);
+        sectors.add(sector4);
+
+
+        return sectors;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -49,5 +81,11 @@ public class AdminRegistrationController {
     @RequestMapping(value = "/list")
     public ModelAndView listRegisteredAdmins() {
         return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(AdminSector.class, new AdminSectorPropertyEditor());
+
     }
 }

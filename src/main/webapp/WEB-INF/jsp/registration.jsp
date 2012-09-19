@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head></head>
     <title>Admin Registration</title>
@@ -13,7 +14,17 @@
                     <td>password:</td>
                     <td><form:password path="password"/></td>
                 </tr>
-                    <td></td>
+                    <td>Sectors:</td>
+                    <td>
+                        <%--<form:select path="adminSectors" multiple="true" items="${sectors}" itemValue="id" itemLabel="sectorName">--%>
+                            <%----%>
+                        <%--</form:select>--%>
+
+
+                    </td>
+                    <td>
+                        <form:checkboxes path="adminSectors" items="${sectors}" itemLabel="sectorName" itemValue="id"/>
+                    </td>
                     <td><input type="submit" value="Go"></td>
                 </tr>
 

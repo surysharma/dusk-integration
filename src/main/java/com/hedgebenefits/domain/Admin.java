@@ -3,11 +3,15 @@ package com.hedgebenefits.domain;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import java.util.List;
+
 public class Admin {
 
     private Long id;
     private String username;
     private String password;
+
+    private List<AdminSector> adminSectors;
 
     public String getUsername() {
         return username;
@@ -31,6 +35,14 @@ public class Admin {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<AdminSector> getAdminSectors() {
+        return adminSectors;
+    }
+
+    public void setAdminSectors(List<AdminSector> adminSectors) {
+        this.adminSectors = adminSectors;
     }
 
     @Override
