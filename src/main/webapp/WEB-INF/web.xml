@@ -6,7 +6,7 @@
     version="2.4">
     <servlet>
         <servlet-name>adminController</servlet-name>
-        <servlet-class>com.hedgebenefits.web.controllers.admin.AdminRegistrationController</servlet-class>
+        <servlet-class>com.hedgebenefits.web.controllers.admin.AdminRegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>adminController</servlet-name>
