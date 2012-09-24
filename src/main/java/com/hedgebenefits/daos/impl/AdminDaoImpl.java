@@ -2,7 +2,6 @@ package com.hedgebenefits.daos.impl;
 
 import com.hedgebenefits.daos.AdminDao;
 import com.hedgebenefits.domain.Admin;
-import org.springframework.stereotype.Repository;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * Time: 07:15
  * To change this template use File | Settings | File Templates.
  */
-@Repository
+
 public class AdminDaoImpl implements AdminDao{
     @Override
     public void save(Admin admin) {

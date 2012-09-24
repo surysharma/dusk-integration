@@ -13,16 +13,6 @@ public class Admin {
 
     private String password;
 
-    private Right right;
-
-    public Right getRight() {
-        return right;
-    }
-
-    public void setRight(Right right) {
-        this.right = right;
-    }
-
     public String getUsername() {
         return username;
     }

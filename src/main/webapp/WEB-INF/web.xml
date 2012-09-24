@@ -4,25 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
-
-    <display-name>hedgebenefits</display-name>
-    <description/>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml</param-value>
-    </context-param>
     <servlet>
-        <servlet-name>hedgebenefits</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <servlet-name>adminController</servlet-name>
+        <servlet-class>com.hedgebenefits.web.controllers.admin.AdminRegistrationController</servlet-class>
     </servlet>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
     <servlet-mapping>
-        <servlet-name>hedgebenefits</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>adminController</servlet-name>
+        <url-pattern>/admin/register</url-pattern>
     </servlet-mapping>
 
 </web-app>
