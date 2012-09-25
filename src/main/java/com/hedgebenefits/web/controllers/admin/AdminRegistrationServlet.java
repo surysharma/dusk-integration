@@ -1,6 +1,7 @@
 package com.hedgebenefits.web.controllers.admin;
 
 import com.hedgebenefits.services.AdminService;
+import com.hedgebenefits.util.BeanFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,10 +29,9 @@ public class AdminRegistrationServlet extends HttpServlet{
 
     @Override
      public void doPost(HttpServletRequest req, HttpServletResponse resp)
-	throws ServletException, IOException{
+	throws ServletException, IOException {
         System.out.println("Post here");
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
         requestDispatcher.forward(req, resp);
     }
-
 }

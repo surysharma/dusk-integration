@@ -1,4 +1,4 @@
-package com.hedgebenefits.web.controllers.admin;
+package com.hedgebenefits.util;
 
 import com.hedgebenefits.daos.impl.AdminDaoImpl;
 import com.hedgebenefits.services.AdminService;
