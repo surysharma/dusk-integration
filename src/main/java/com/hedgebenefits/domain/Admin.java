@@ -2,17 +2,19 @@ package com.hedgebenefits.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="admin")
 public class Admin {
 
     private Long id;
-    @NotBlank(message = "Username cannot not be null")
     private String username;
-    @NotBlank(message = "Password cannot not be null")
 
     private String password;
 
+    @Column(name = "user_name")
     public String getUsername() {
         return username;
     }
@@ -21,6 +23,7 @@ public class Admin {
         this.username = username;
     }
 
+    @Column(name = "user_password")    
     public String getPassword() {
         return password;
     }
@@ -29,6 +32,8 @@ public class Admin {
         this.password = password;
     }
 
+    @Id
+    @GeneratedValue
     public Long getId() {
         return id;
     }

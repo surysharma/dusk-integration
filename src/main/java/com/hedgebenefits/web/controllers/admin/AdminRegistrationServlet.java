@@ -1,8 +1,10 @@
 package com.hedgebenefits.web.controllers.admin;
 
+import com.hedgebenefits.domain.Admin;
 import com.hedgebenefits.services.AdminService;
 import com.hedgebenefits.util.BeanFactory;
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,8 +28,15 @@ public class AdminRegistrationServlet extends HttpServlet{
      public void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException{
         SessionFactory sf = sessionFactory;
-
-        System.out.println("Test here");
+        Session session = sf.openSession();
+        session.beginTransaction();
+        Admin admin = new Admin();
+        admin.setUsername("Suresh");
+        admin.setPassword("somepag");
+        session.save(admin);
+        session.getTransaction().commit();
+        session.close();
+        System.out.println("Session created:" + session);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/jsp/registration.jsp");
         requestDispatcher.forward(req, resp);
     }

@@ -1,7 +1,9 @@
 package com.hedgebenefits.util;
 
+import com.hedgebenefits.domain.Admin;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.ImprovedNamingStrategy;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,6 +15,9 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtils {
     public static SessionFactory sessionFactory =
             new AnnotationConfiguration()
+                    .addPackage("com.hedgebenefits.domain")
+                    .addAnnotatedClass(Admin.class)
+                    .setNamingStrategy(new ImprovedNamingStrategy())
                     .configure("hibernate.cfg.xml")
                     .buildSessionFactory();
 }
