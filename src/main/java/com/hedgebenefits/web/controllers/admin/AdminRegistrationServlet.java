@@ -28,14 +28,13 @@ public class AdminRegistrationServlet extends HttpServlet{
      public void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException{
         SessionFactory sf = sessionFactory;
-        Session session = sf.openSession();
+        Session session = sf.getCurrentSession();
         session.beginTransaction();
         Admin admin = new Admin();
         admin.setUsername("Suresh");
-        admin.setPassword("somepag");
+        admin.setPassword("somepass");
         session.save(admin);
         session.getTransaction().commit();
-        session.close();
         System.out.println("Session created:" + session);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/jsp/registration.jsp");
         requestDispatcher.forward(req, resp);
