@@ -11,5 +11,8 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * To change this template use File | Settings | File Templates.
  */
 public class HibernateUtils {
-    public static SessionFactory sessionFactory = new AnnotationConfiguration().configure("").buildSessionFactory();
+    public static SessionFactory sessionFactory =
+            new AnnotationConfiguration()
+                    .configure("hibernate.cfg.xml")
+                    .buildSessionFactory();
 }
