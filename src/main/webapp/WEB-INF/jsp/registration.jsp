@@ -11,6 +11,7 @@
                 <option value="dark" label="Dark dark">Dark dark</option>
                 <option value="white" label="Dark White">Dark White</option>
             </select>
+                <input type="hidden" name="id" value="${id}"/>
             <input type="submit" name="Hit me">
         </form>
         </tr>

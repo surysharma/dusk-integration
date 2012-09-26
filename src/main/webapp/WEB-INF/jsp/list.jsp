@@ -2,6 +2,6 @@
 <head></head>
 <title>Admin List</title>
 
-<body>hello
+<body>hello ${admin.username}
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.hedgebenefits.util;
 
 import com.hedgebenefits.domain.Admin;
+import com.hedgebenefits.domain.Receipt;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.ImprovedNamingStrategy;
@@ -17,6 +18,7 @@ public class HibernateUtils {
             new AnnotationConfiguration()
                     .addPackage("com.hedgebenefits.domain")
                     .addAnnotatedClass(Admin.class)
+                    .addAnnotatedClass(Receipt.class)
                     .setNamingStrategy(new ImprovedNamingStrategy())
                     .configure("hibernate.cfg.xml")
                     .buildSessionFactory();

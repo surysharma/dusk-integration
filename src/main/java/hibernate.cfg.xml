@@ -13,5 +13,5 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.current_session_context_class">thread</property>
-    </session-factory>
+    </session-factory>  
 </hibernate-configuration>

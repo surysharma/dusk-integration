@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="admin")
@@ -11,6 +12,7 @@ public class Admin {
 
     private Long id;
     private String username;
+    private List<Receipt> receipts;
 
     private String password;
 
@@ -40,6 +42,15 @@ public class Admin {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Receipt> getReceipts() {
+        return receipts;
+    }
+
+    public void setReceipts(List<Receipt> receipts) {
+        this.receipts = receipts;
     }
 
     @Override
