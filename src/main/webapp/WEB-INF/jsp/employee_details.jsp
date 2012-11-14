@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head><title>Employee Details</title></head>
-<body>Employee name: ${employee.name}<br/>
+<body>
+<p class="style color:red">Employee name: ${employee.name}</p><br/>
         
 </body>
 </html>
