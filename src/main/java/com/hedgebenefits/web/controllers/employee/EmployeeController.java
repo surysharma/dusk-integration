@@ -5,6 +5,7 @@ import com.hedgebenefits.domain.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -24,9 +25,9 @@ public class EmployeeController {
 
     }
 
-   @RequestMapping(value = "/employee/add/")
+   @RequestMapping(value = "/employee/add/", method = RequestMethod.POST)
     public void addEmployee(Employee employee){
-       System.out.println(employee);
+       System.out.println(employee.getName());
     }
 
 
