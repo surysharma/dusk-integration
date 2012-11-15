@@ -20,5 +20,14 @@ public class EmployeeController {
                 .build();
         mav.addObject("employee", employee);
         return mav;
+
+
     }
+
+   @RequestMapping(value = "/employee/add/")
+    public void addEmployee(Employee employee){
+       System.out.println(employee);
+    }
+
+
 }
