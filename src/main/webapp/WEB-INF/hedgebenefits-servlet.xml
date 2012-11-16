@@ -33,12 +33,4 @@
             </list>
         </property>
     </bean>
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <util:list id="beanList">
-                <ref bean="jsonHttpMessageConverter"/>
-            </util:list>
-        </property>
-    </bean>
-    <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 </beans>
