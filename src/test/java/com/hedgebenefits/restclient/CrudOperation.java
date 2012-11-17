@@ -11,8 +11,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
- * This class simply performs the CRUD operations on application. Used just as a test client to check CRUD working using REST
+ * This class simply performs the CRUD operations on application.
+ * Used just as a test client to check CRUD working using REST using JSON and POX
  */
 public class CrudOperation {
 
@@ -72,8 +75,55 @@ public class CrudOperation {
         restTemplate.exchange("http://localhost:8080/employee/update/{id}", HttpMethod.DELETE, requestEntity, String.class, "42");
     }
 
-    //---------------------------------------------------------------------------------
+    //-----------------NOW WITH POX------------------------------------------
+
+    @Test
+    public void getMethodWithPOX() {
+        RestTemplate restTemplate = new RestTemplate();
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("id", "2231");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(newArrayList(MediaType.APPLICATION_XML));
+        HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 
 
+        ResponseEntity<String> result = restTemplate
+                .exchange("http://localhost:8080/employee/{id}", HttpMethod.GET, requestEntity, String.class, "344");
+        System.out.println(result.getBody());
+    }
 
+    @Test
+    public void postMethodWithPOX() {
+        RestTemplate restTemplate = new RestTemplate();
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("id", "2231");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_XML);
+        String xmlEmp = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><employee><id>782</id><name>poster</name><niNumber>WE34KL3</niNumber></employee>";
+        HttpEntity<String> requestEntity = new HttpEntity<String>(xmlEmp, headers);
+
+
+        ResponseEntity<String> result = restTemplate
+                .exchange("http://localhost:8080/employee/add/", HttpMethod.POST, requestEntity, String.class);
+        System.out.println(result.getBody());
+    }
+/*
+    @Test
+    public void prepareXml() throws JAXBException, IOException {
+        Employee employee = new Employee.EmployeeBuilder().id(213L).name("poster").niNumber("WE34KL3").build();
+
+        JAXBContext context = JAXBContext.newInstance(Employee.class);
+        Marshaller marshaller = context.createMarshaller();
+        OutputStream os = null;
+        try{
+         os = new FileOutputStream(new File("temp.xml"));
+
+         marshaller.marshal(employee, os);
+        }
+        finally {
+            if (os != null)  os.close();
+        }
+    }*/
 }

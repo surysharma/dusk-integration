@@ -1,12 +1,19 @@
 package com.hedgebenefits.domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
+@XmlRootElement
+@XmlType(propOrder = { "id", "name", "niNumber" })
 public class Employee {
-    private Long id;
-    private String name;
-    private String niNumber;
 
-    private Employee(){}
+    @XmlElement
+    private Long id;
+    @XmlElement
+    private String name;
+    @XmlElement
+    private String niNumber;
 
     public Long getId() {
         return id;

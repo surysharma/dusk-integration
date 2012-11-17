@@ -22,8 +22,6 @@ public class EmployeeController {
                 .build();
         mav.addObject("employee", employee);
         return mav;
-
-
     }
 
    @RequestMapping(value = "/employee/add/", method = RequestMethod.POST)
@@ -42,5 +40,4 @@ public class EmployeeController {
     public void deleteEmployee(@PathVariable Long id){
         System.out.println(new StringBuilder().append(" Delete employee with id:").append(id).toString());
     }
-
 }
