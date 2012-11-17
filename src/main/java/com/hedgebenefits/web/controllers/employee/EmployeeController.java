@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EmployeeController {
 
-    @RequestMapping(value = "/employee/{id}")
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.GET)
     public ModelAndView getEmployee(@PathVariable Long id){
         ModelAndView mav = new ModelAndView("employee_details");
         Employee employee = new Employee.EmployeeBuilder()
@@ -30,11 +30,17 @@ public class EmployeeController {
     public void addEmployee(HttpEntity<Employee> employeeEntity){
        Employee employee = employeeEntity.getBody();
        System.out.println(employee.getName());
-    }
-//   @RequestMapping(value = "/employee/add/", method = RequestMethod.POST)
-//    public void addEmployee(@RequestBody Employee employee){
-//       System.out.println(employee.getName());
-//    }
+   }
 
+    @RequestMapping(value = "/employee/update/{id}", method= RequestMethod.PUT)
+    public void updateEmployee(@PathVariable Long id, HttpEntity<Employee> employeeEntity){
+        Employee employee = employeeEntity.getBody();
+        System.out.println(new StringBuilder().append(employee.getName()).append(", to be updated for employee with id:").append(id).toString());
+    }
+
+    @RequestMapping(value = "/employee/update/{id}", method = RequestMethod.DELETE)
+    public void deleteEmployee(@PathVariable Long id){
+        System.out.println(new StringBuilder().append(" Delete employee with id:").append(id).toString());
+    }
 
 }

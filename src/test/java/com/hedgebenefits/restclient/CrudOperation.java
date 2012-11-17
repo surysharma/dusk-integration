@@ -1,5 +1,6 @@
 package com.hedgebenefits.restclient;
 
+import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.hedgebenefits.domain.Employee;
@@ -8,6 +9,7 @@ import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class simply performs the CRUD operations on application. Used just as a test client to check CRUD working using REST
@@ -15,7 +17,7 @@ import java.util.HashMap;
 public class CrudOperation {
 
     @Test
-    public void checkGetMethod() {
+    public void checkGetMethodWithJson() {
         RestTemplate restTemplate = new RestTemplate();
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("id", "2231");
@@ -26,7 +28,7 @@ public class CrudOperation {
 
 
     @Test
-    public void postMethod() {
+    public void postMethodWithJson() {
         RestTemplate restTemplate = new RestTemplate();
         Employee employee = new Employee.EmployeeBuilder().id(213L).name("poster").niNumber("WE34KL3").build();
 
@@ -40,4 +42,38 @@ public class CrudOperation {
         HttpEntity<String> requestEntity = new HttpEntity<String>(jsonEmployee, headers);
         restTemplate.exchange("http://localhost:8080/employee/add/", HttpMethod.POST, requestEntity, String.class);
     }
+
+
+    @Test
+    public void putMethodWithJson() {
+        RestTemplate restTemplate = new RestTemplate();
+        Employee employee = new Employee.EmployeeBuilder().id(213L).name("poster").niNumber("WE34KL3").build();
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        String jsonEmployee = gson.toJson(employee);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Map<String, String> map = Maps.<String, String>newHashMap();
+        map.put("id", "42");
+        headers.setAll(map);
+        HttpEntity<String> requestEntity = new HttpEntity<String>(jsonEmployee, headers);
+
+        restTemplate.exchange("http://localhost:8080/employee/update/{id}", HttpMethod.PUT, requestEntity, String.class, "42");
+    }
+
+    @Test
+    public void deleteMethodWithJson() {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+        restTemplate.exchange("http://localhost:8080/employee/update/{id}", HttpMethod.DELETE, requestEntity, String.class, "42");
+    }
+
+    //---------------------------------------------------------------------------------
+
+
+
 }
