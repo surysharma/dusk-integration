@@ -53,6 +53,7 @@
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: org.springframework:org.springframework.test:3.0.5.RELEASE" />
           <element id="library" level="project" name="Maven: hsqldb:hsqldb:1.8.0.10" />
+          <element id="library" level="project" name="Maven: joda-time:joda-time:2.1" />
         </element>
       </element>
     </root>
