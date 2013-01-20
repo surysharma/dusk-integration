@@ -8,12 +8,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "address")
 public class Address {
-    private static Address address = new Address();
 
     @OneToOne(mappedBy = "shippingAddress", cascade = CascadeType.ALL)
     private User user;
 
-    protected Address(){}
+    protected Address(String address, String postCode, String city){
+
+        this.street = address;
+        this.zipCode = postCode;
+        this.city = city;
+    }
 
     @Id
     @GeneratedValue
@@ -25,21 +29,8 @@ public class Address {
     @Column(name = "city")
     private String city;
 
-
-
     public String getStreet(){
         return street;
-    }
-
-    public static Address getInstance(String street, String zipCode, String city) {
-        address.street = street;
-        address.zipCode = zipCode;
-        address.city = city;
-        return address;
-    }
-
-    public static Address getAddress() {
-        return address;
     }
 
     public Long getId() {
@@ -60,5 +51,29 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public static AddressBuilder addressBuilder(String address, String postCode, String city) {
+        return new AddressBuilder(address, postCode, city);  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public static class AddressBuilder {
+        private String address;
+        private String postCode;
+        private String city;
+
+        public AddressBuilder(String address, String postCode, String city) {
+            this.address = address;
+            this.postCode = postCode;
+            this.city = city;
+        }
+
+        public Address build() {
+            return new Address(address, postCode, city);  //To change body of created methods use File | Settings | File Templates.
+        }
+
+        public AddressBuilder user(String someUser) {
+            return this;  //To change body of created methods use File | Settings | File Templates.
+        }
     }
 }

@@ -33,7 +33,7 @@ public class EntityAssosiationsMappingIntegrationTest extends AbstractDaoSupport
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void shouldSavePdfMessage() throws Exception {
         //Given
-        Address address = Address.getInstance("someAddress", "N128DG", "London");
+        Address address = Address.addressBuilder("someAddress", "N128DG", "London").user("someUser").build();
         User user = UserBuilder()
                 .firstName("someFirstName")
                 .lastName("someLastName")
