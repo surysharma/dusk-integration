@@ -10,10 +10,10 @@ import javax.persistence.*;
 public class Address {
     private static Address address = new Address();
 
-    @OneToOne(mappedBy = "shippingAddress")
+    @OneToOne(mappedBy = "shippingAddress", cascade = CascadeType.ALL)
     private User user;
 
-    private Address(){}
+    protected Address(){}
 
     @Id
     @GeneratedValue

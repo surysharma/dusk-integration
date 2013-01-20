@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    private User(){}
+    protected User(){}
 
     @Id
     @GeneratedValue

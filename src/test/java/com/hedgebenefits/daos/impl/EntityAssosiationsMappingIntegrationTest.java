@@ -43,7 +43,6 @@ public class EntityAssosiationsMappingIntegrationTest extends AbstractDaoSupport
         address.setUser(user);
         //When
         save(address);
-        save(user);
         flush();
 
         //Then
