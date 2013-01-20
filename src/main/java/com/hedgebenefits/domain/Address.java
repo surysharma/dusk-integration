@@ -9,6 +9,10 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
     private static Address address = new Address();
+
+    @OneToOne(mappedBy = "shippingAddress")
+    private User user;
+
     private Address(){}
 
     @Id
@@ -48,5 +52,13 @@ public class Address {
 
     public String getCity() {
         return city;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
