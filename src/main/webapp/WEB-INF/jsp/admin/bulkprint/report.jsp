@@ -9,7 +9,9 @@
 <html>
 <head><title>Simple jsp page</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript">
-        
+        $(function(){
+            $('#submit').click(function(){alert('Hola')})
+        })
 </script>
 </head>
 <body>
