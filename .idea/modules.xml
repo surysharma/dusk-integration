@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dusk-integration.iml" filepath="$PROJECT_DIR$/dusk-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/interop/interop.iml" filepath="$PROJECT_DIR$/interop/interop.iml" />
     </modules>
   </component>
 </project>

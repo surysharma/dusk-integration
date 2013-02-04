@@ -7,7 +7,7 @@
     <groupId>hedgebenefits</groupId>
     <artifactId>hedgebenefits</artifactId>
     <version>1.0</version>
-<packaging>war</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
@@ -219,6 +219,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>13.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.16</version>
         </dependency>
 
     </dependencies>
