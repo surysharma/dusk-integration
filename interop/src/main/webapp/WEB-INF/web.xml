@@ -10,7 +10,7 @@
 
     <servlet>
         <servlet-name>interop</servlet-name>
-        <servlet-class>com.interop.InteropContainer</servlet-class>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>interop</servlet-name>
