@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +25,11 @@ public class AdminResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Admin getAdminFor(@PathParam("id") Long id) {
-        return adminRepository.get(id);
+    public Response getAdminFor(@PathParam("id") Long id) {
+        Admin admin = adminRepository.get(id);
+        if (admin == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(admin).status(Response.Status.OK).build();
     }
 }
