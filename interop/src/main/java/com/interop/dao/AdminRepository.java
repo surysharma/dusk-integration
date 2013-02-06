@@ -21,4 +21,8 @@ public class AdminRepository {
     public Admin get(Long id) {
         return data.get(id);  //To change body of created methods use File | Settings | File Templates.
     }
+
+    public Map<Long, Admin> getAll() {
+        return data;  //To change body of created methods use File | Settings | File Templates.
+    }
 }

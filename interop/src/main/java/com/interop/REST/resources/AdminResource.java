@@ -4,12 +4,11 @@ import com.interop.dao.AdminRepository;
 import com.interop.dao.InteropRepository;
 import com.interop.domain.Admin;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBElement;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,5 +30,13 @@ public class AdminResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(admin).status(Response.Status.OK).build();
+    }
+
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response addAdmin(JAXBElement<Admin> admin) {
+        Map<Long, Admin> adminData = adminRepository.getAll();
+        adminData.put(Long.valueOf(adminData.size() + 1), admin.getValue());
+        return Response.ok().status(Response.Status.CREATED).build();
     }
 }
