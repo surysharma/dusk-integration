@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  * This class simply performs the CRUD operations on application.
@@ -44,6 +46,31 @@ public class CrudOperation {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> requestEntity = new HttpEntity<String>(jsonEmployee, headers);
         restTemplate.exchange("http://localhost:8080/employee/add/", HttpMethod.POST, requestEntity, String.class);
+    }
+
+    @Test
+    public void postAdminWithJson() {
+
+        String ROOT_URI = "http://localhost:8080/rest/";
+        String RESOURCE_PATH = "admin/";
+        String OPERATION = "add";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String jsonEmployee = "{\"rights\":\"rights5\",\"username\":\"admin5\"}";
+        HttpEntity<String> requestEntity = new HttpEntity<String>(jsonEmployee, headers);
+
+        ResponseEntity<String> responseEntity = restTemplate.exchange(ROOT_URI.concat(RESOURCE_PATH).concat(OPERATION), HttpMethod.POST, requestEntity, String.class);
+        String id = responseEntity.getBody();
+        assertThat(responseEntity.getStatusCode(), is(HttpStatus.CREATED));
+
+        requestEntity = new HttpEntity<String>(id);
+//        ResponseEntity<String> exchange = restTemplate.exchange(ROOT_URI.concat(RESOURCE_PATH).concat("id/{id}"), HttpMethod.GET, requestEntity, String.class);
+//        assertThat(exchange, notNullValue());
+//            restTemplate.exchange(ROOT_URI.concat(RESOURCE_PATH).concat("id/{id}"), HttpMethod.GET, requestEntity, String.class);
     }
 
 

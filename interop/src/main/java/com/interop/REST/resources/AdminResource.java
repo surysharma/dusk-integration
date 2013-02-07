@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class AdminResource {
 
-    private AdminRepository adminRepository = InteropRepository.getRepository();
+    private static AdminRepository adminRepository = InteropRepository.getRepository();
 
     @GET
     @Path("{id}")
@@ -36,7 +36,8 @@ public class AdminResource {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response addAdmin(JAXBElement<Admin> admin) {
         Map<Long, Admin> adminData = adminRepository.getAll();
-        adminData.put(Long.valueOf(adminData.size() + 1), admin.getValue());
+        Long id = Long.valueOf(adminData.size() + 1);
+        adminData.put(id, admin.getValue());
         return Response.ok().status(Response.Status.CREATED).build();
     }
 }
