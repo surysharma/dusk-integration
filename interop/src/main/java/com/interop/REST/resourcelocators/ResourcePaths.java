@@ -18,4 +18,11 @@ public class ResourcePaths {
     public AdminResource produceJson() {
         return new AdminResource();
     }
+
+    @Path("/add")
+    public AdminResource addAdmin() {
+        return new AdminResource();
+    }
+
+
 }
