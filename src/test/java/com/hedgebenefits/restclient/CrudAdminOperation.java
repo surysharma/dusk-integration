@@ -1,9 +1,5 @@
 package com.hedgebenefits.restclient;
 
-import com.google.common.collect.Maps;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.hedgebenefits.domain.Employee;
 import org.junit.Test;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -20,7 +15,7 @@ import static org.hamcrest.core.Is.is;
  * Used just as a test client to check CRUD working using REST using JSON and POX
  */
 public class CrudAdminOperation {
-        String ROOT_URI = "http://localhost:8899/rest/";
+        String ROOT_URI = "http://localhost:8080/rest/";
         String RESOURCE_PATH = "admin/";
         String ADD = "add";
     private static final String UPDATE = "update/id";

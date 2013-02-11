@@ -5,8 +5,7 @@ import com.interop.dao.InteropRepository;
 import com.interop.domain.Admin;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import javax.xml.bind.JAXBElement;
 import java.util.Map;
 
@@ -19,17 +18,34 @@ import java.util.Map;
  */
 public class AdminResource {
 
+    private Long id;
+    Admin admin;
+
+    public AdminResource(Long id, Request request) {
+        this.id = id;
+        this.admin = adminRepository.get(id);
+        String entityTagValue = String.format("%s", admin.hashCode());
+        EntityTag responseEntity = new EntityTag(entityTagValue);
+        Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(responseEntity);
+        if (responseBuilder != null) {
+            throw new WebApplicationException(responseBuilder.build());
+        }
+    }
+
+    public AdminResource(){}
+
     private static AdminRepository adminRepository = InteropRepository.getRepository();
 
     @GET
-    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response getAdminFor(@PathParam("id") Long id) {
+    public Response getAdminFor() {
         Admin admin = adminRepository.get(id);
+        String entityTagValue = String.format("%s", admin.hashCode());
+        EntityTag responseEntity = new EntityTag(entityTagValue);
         if (admin == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(admin).status(Response.Status.OK).build();
+        return Response.ok(admin).tag(responseEntity).status(Response.Status.OK).build();
     }
 
     @POST
@@ -44,12 +60,12 @@ public class AdminResource {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response updateAdmin(@PathParam("id") Long id,JAXBElement<Admin> admin) {
+    public Response updateAdmin(@PathParam("id") Long id, JAXBElement<Admin> admin) {
         Map<Long, Admin> adminData = adminRepository.getAll();
         Admin existingAdmin = adminData.get(id);
-       if (existingAdmin == null){
-           return Response.ok().status(Response.Status.NOT_FOUND).build();
-       }
+        if (existingAdmin == null) {
+            return Response.ok().status(Response.Status.NOT_FOUND).build();
+        }
         adminData.put(id, admin.getValue());
         return Response.ok().status(Response.Status.CREATED).build();
     }

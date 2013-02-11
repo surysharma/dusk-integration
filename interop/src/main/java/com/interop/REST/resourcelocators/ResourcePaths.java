@@ -3,10 +3,9 @@ package com.interop.REST.resourcelocators;
 import com.interop.REST.resources.AdminResource;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import java.net.*;
-import java.net.URI;
+import javax.ws.rs.core.Request;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,9 +17,9 @@ import java.net.URI;
 @Path("/admin")
 public class ResourcePaths {
 
-    @Path("/id")
-    public AdminResource produceJson() {
-        return new AdminResource();
+    @Path("/id/{id}")
+    public AdminResource produceJson(@PathParam("id") Long id, @Context Request request) {
+        return new AdminResource(id, request);
     }
 
     @Path("/add")
@@ -29,8 +28,7 @@ public class ResourcePaths {
     }
 
     @Path("/update/id")
-    public AdminResource updateAdmin(@Context UriInfo uriInfo) {
-        URI absolutePath = uriInfo.getAbsolutePath();
+    public AdminResource updateAdmin() {
         return new AdminResource();
     }
 
