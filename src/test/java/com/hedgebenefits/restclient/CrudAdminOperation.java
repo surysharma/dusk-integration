@@ -53,8 +53,8 @@ public class CrudAdminOperation {
         String jsonEmployee = "{\"rights\":\"updatedrights2\",\"username\":\"updatedadmin2\"}";
         HttpEntity<String> requestEntity = new HttpEntity<String>(jsonEmployee, headers);
 
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("id", "2");
+        Map<String, Long> map = new HashMap<String, Long>();
+        map.put("id", 2L);
         ResponseEntity<String> responseEntity = restTemplate.exchange(ROOT_URI.concat(RESOURCE_PATH).concat(UPDATE).concat("/{id}"), HttpMethod.PUT, requestEntity, String.class, map);
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.CREATED));
     }
