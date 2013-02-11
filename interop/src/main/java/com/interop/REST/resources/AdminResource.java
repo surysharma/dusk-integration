@@ -40,4 +40,20 @@ public class AdminResource {
         adminData.put(id, admin.getValue());
         return Response.ok().status(Response.Status.CREATED).build();
     }
+
+    @PUT
+    @Path("{id}")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response updateAdmin(@PathParam("id") String id,JAXBElement<Admin> admin) {
+        Map<Long, Admin> adminData = adminRepository.getAll();
+           Long newId = Long.parseLong(id);
+        Admin existingAdmin = adminData.get(newId);
+       if (existingAdmin == null){
+           return Response.ok().status(Response.Status.NOT_FOUND).build();
+       }
+        adminData.put(newId, admin.getValue());
+        return Response.ok().status(Response.Status.CREATED).build();
+    }
+
+
 }

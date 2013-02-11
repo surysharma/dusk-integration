@@ -51,7 +51,7 @@ public class CrudOperation {
     @Test
     public void postAdminWithJson() {
 
-        String ROOT_URI = "http://localhost:8080/rest/";
+        String ROOT_URI = "http://localhost:8899/rest/";
         String RESOURCE_PATH = "admin/";
         String OPERATION = "add";
 

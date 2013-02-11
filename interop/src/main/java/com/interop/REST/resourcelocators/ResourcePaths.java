@@ -3,6 +3,10 @@ package com.interop.REST.resourcelocators;
 import com.interop.REST.resources.AdminResource;
 
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+import java.net.*;
+import java.net.URI;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,6 +25,12 @@ public class ResourcePaths {
 
     @Path("/add")
     public AdminResource addAdmin() {
+        return new AdminResource();
+    }
+
+    @Path("/update/id")
+    public AdminResource updateAdmin(@Context UriInfo uriInfo) {
+        URI absolutePath = uriInfo.getAbsolutePath();
         return new AdminResource();
     }
 
