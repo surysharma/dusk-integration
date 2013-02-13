@@ -3,6 +3,7 @@ package com.interop.REST.resourcelocators;
 public enum URI {
     HOST("http://localhost:8899/rest"),
     ROOT("/admin"),
+    GET("/id"),
     ADD("/add"),
     UPDATE("/update");
 
@@ -12,7 +13,7 @@ public enum URI {
         this.uri = uri;
     }
 
-    public String value(){
+    public String value() {
         return uri;
     }
 }
