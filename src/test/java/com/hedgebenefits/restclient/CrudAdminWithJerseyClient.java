@@ -2,6 +2,7 @@ package com.hedgebenefits.restclient;
 
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.uri.UriTemplate;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.Is.is;
 
 public class CrudAdminWithJerseyClient {
 
@@ -19,21 +20,46 @@ public class CrudAdminWithJerseyClient {
     String RESOURCE_PATH = "admin/";
     String ADD = "add";
     private static final String UPDATE = "update/id";
+    private static Client client = Client.create();
+
+    private static int STATUS_OK = 200;
+    private static int NOT_ALLOWED = 304;
+    private static String IF_NONE_MATCH = "If-None-Match";
+    private static String HTTP = "http";
+    private static String HOSTNAME = "localhost";
+    private static String PORT = "8080";
+
 
     @Test
-    public void shouldPerformGet() {
-        //given
-        Client client = Client.create();
-        Map<String, String> values = new HashMap<String, String>();
-        values.put("id", "3");
-        String uri = UriTemplate.createURI("http", "", "localhost", "8080", "/rest/admin/id/{id}", "", "", values, true);
+    public void shouldPerformConditionalGet() {
+        //given a URI template
+        Map<String, String> pathParams = new HashMap<String, String>();
+        pathParams.put("id", "3");
+        String uri = UriTemplate.createURI(HTTP, "", HOSTNAME, PORT, "/rest/admin/id/{id}", "", "", pathParams, true);
+        //and a web resource for it
         WebResource resource = client.resource(uri);
         System.out.println(resource.getURI());
-        //when
-        String s = resource.accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
 
-        //then
-        assertThat(s, notNullValue());
+        //when GET request is made for 1st time
+        ClientResponse firstResponse = resource
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .get(ClientResponse.class);
 
+        //then a fresh resource is returned with status code
+        assertThat(firstResponse.getClientResponseStatus().getStatusCode(), is(STATUS_OK));
+        System.out.println(firstResponse.getClientResponseStatus().getStatusCode());
+
+        //when a second GET request is made using the same Entity tag value
+        String value = firstResponse.getEntityTag().getValue();
+        ClientResponse secondResponse = resource
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .header(IF_NONE_MATCH, "\"" + value + "\"")
+                .get(ClientResponse.class);
+
+        //then the Status code returned is
+        assertThat(secondResponse.getClientResponseStatus().getStatusCode(), is(NOT_ALLOWED));
+        System.out.println(secondResponse.getClientResponseStatus().getStatusCode());
     }
+
+
 }
