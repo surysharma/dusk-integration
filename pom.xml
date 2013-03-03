@@ -12,16 +12,18 @@
     <properties>
         <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
         <hibernate-core-version>3.5.6-Final</hibernate-core-version>
+        <querydsl.version>2.9.0</querydsl.version>
     </properties>
 
 
     <dependencies>
         <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>13.0.1</version>
         </dependency>
-            
+
+
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -101,6 +103,47 @@
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
         </dependency>
+
+        <!-- Spring data dependencies-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.2.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <!-- Query dsl -->
+
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <!-- Query dsl Anotation processing tool -->
+        <dependency>
+            <groupId>com.mysema.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+        </dependency>
+
 
         <!-- Junit and Mockitio dependecies-->
         <dependency>
@@ -226,7 +269,7 @@
             <artifactId>joda-time</artifactId>
             <version>2.1</version>
         </dependency>
-                    
+
 
     </dependencies>
 
