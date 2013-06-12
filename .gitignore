@@ -1,6 +1,5 @@
 target
-*/.idea
-**/*/.idea
+.idea/*
 *.iml
 */workspace.xml
 *.iws

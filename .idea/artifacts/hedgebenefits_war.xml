@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="hedgebenefits:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="hedgebenefits.war">
-      <element id="artifact" artifact-name="hedgebenefits:war exploded" />
-    </root>
-  </artifact>
-</component>
