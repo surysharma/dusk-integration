@@ -13,8 +13,18 @@ public class Admin {
     private Long id;
     private String username;
     private List<Receipt> receipts;
+    private User user;
 
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Column(name = "user_name")
     public String getUsername() {
