@@ -11,6 +11,7 @@
 
     <properties>
         <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+        <webflow-version>2.3.2.RELEASE</webflow-version>
         <hibernate-core-version>3.5.6-Final</hibernate-core-version>
     </properties>
 
@@ -22,6 +23,14 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
+        <!-- Spring webflow -->
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-webflow</artifactId>
+            <version>${webflow-version}</version>
+        </dependency>
+
 
         <!--Spring 3 dependencies-->
         <dependency>

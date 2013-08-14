@@ -2,10 +2,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+       http://www.springframework.org/schema/webflow-config
+       http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.hedgebenefits.*"/>
@@ -13,5 +18,32 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    
+
+    <!-- TODO: We need to externalize the webflow config settings, currently not working, problem with finding xsd right version-->
+    <!--<import resource="configs/webflow/room-booking-webflow-config.xml"/>-->
+
+    <!-- First define the flow Handler adapter, which is equivalent to handlers(controllers) in spring-MVC.
+    The handler just delegates to flowExecutor,which do the heavylifting of executing the flow
+   -->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor"/>
+    </bean>
+    <!-- Just registering the flowExecutor here-->
+    <webflow:flow-executor id="flowExecutor"/>
+
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
+    </bean>
+
+    <!-- Secondly we need to register the flow.xml using the flow registry -->
+    <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF" flow-builder-services="flowBuilderServices">
+        <webflow:flow-location-pattern value="**/*-flow.xml"/>
+    </webflow:flow-registry>
+
+    <webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator"/>
+
+    <bean id="mvcViewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="viewResolvers" ref="viewResolver"/>
+    </bean>
+
 </beans>
