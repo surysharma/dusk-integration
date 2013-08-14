@@ -11,6 +11,7 @@
     <title></title>
 </head>
 <body>
-Booking page <p><a href="${flowExecutionUrl}&_eventId=proceed">Proceed</a></p>
+Thank you page
+<p><a href="${flowExecutionUrl}&_eventId=home">home</a></p>
 </body>
 </html>

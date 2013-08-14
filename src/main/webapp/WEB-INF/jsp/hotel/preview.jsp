@@ -11,6 +11,9 @@
     <title></title>
 </head>
 <body>
-Booking page <p><a href="${flowExecutionUrl}&_eventId=proceed">Proceed</a></p>
+Preview page
+<p><a href="${flowExecutionUrl}&_eventId=submit">Submit</a></p>
+
+<p><a href="${flowExecutionUrl}&_eventId=cancel">Cancel</a></p>
 </body>
 </html>

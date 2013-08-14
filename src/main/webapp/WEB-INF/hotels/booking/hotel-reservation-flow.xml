@@ -4,6 +4,20 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
       http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <view-state id="startbooking" view="hotel/booking"/>
+    <view-state id="startbooking" view="hotel/booking">
+        <transition on="proceed" to="preview"/>
+    </view-state>
+
+    <view-state id="preview" view="hotel/preview">
+        <transition on="submit" to="thankyou"/>
+        <transition on="cancel" to="cancelBookingState"/>
+    </view-state>
+
+    <view-state id="thankyou" view="hotel/thankyou">
+        <transition on="home" to="endBookingState"/>
+    </view-state>
+
+    <end-state id="cancelBookingState"/>
+    <end-state id="endBookingState"/>
 
 </flow>
