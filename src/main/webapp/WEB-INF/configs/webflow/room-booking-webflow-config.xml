@@ -7,17 +7,24 @@
        http://www.springframework.org/schema/webflow-config
        http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd">
 
+    <!-- Define a handler adapter which delegates to flow Executor-->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-        <webflow:flow-executor/>
+        <property name="flowExecutor" ref="flowExecutor"/>
     </bean>
-    <bean id="flowUrlHandler" class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
-        <webflow:flow-registry id="flowRegistry"/>
+    <webflow:flow-executor id="flowExecutor"/>
+
+    <!-- Define flowHandlerMapping-->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
     </bean>
+
+    <!-- Map the flows to flow definition-->
     <webflow:flow-registry id="flowRegistry" base-path="/WEB-INF" flow-builder-services="flowBuilderServices">
         <webflow:flow-location-pattern value="**/*-flow.xml"/>
     </webflow:flow-registry>
     <webflow:flow-builder-services id="flowBuilderServices" view-factory-creator="viewFactoryCreator"/>
 
+    <!-- integrate with existing MVC view resolvers -->
     <bean id="viewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
         <property name="viewResolvers" ref="viewResolver"/>
     </bean>
