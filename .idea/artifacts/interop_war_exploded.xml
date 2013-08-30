@@ -7,12 +7,6 @@
         <element id="directory" name="classes">
           <element id="module-output" name="interop" />
         </element>
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.16" />
-          <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
-          <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
-          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
-        </element>
       </element>
     </root>
   </artifact>

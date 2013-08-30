@@ -17,7 +17,7 @@ import static org.hamcrest.core.Is.is;
 
 public class CrudAdminWithJerseyClient {
 
-    String ROOT_URI = "http://localhost:8080/rest/";
+    String ROOT_URI = "http://localhost:8899/rest/";
     String RESOURCE_PATH = "admin/";
     String ADD = "add";
     private static final String UPDATE = "update/id";
@@ -37,6 +37,7 @@ public class CrudAdminWithJerseyClient {
         //given a URI template
         Map<String, String> pathParams = newHashMap(new String[]{"id", "3"});
         String uri = UriTemplate.createURI(HTTP, "", HOSTNAME, PORT, "/rest/admin/id/{id}", "", "", pathParams, true);
+
         //and a web resource for it
         WebResource resource = client.resource(uri);
         System.out.println(resource.getURI());

@@ -15,7 +15,7 @@ import static org.hamcrest.core.Is.is;
  * Used just as a test client to check CRUD working using REST using JSON and POX
  */
 public class CrudAdminOperation {
-        String ROOT_URI = "http://localhost:8080/rest/";
+        String ROOT_URI = "http://localhost:8899/rest/";
         String RESOURCE_PATH = "admin/";
         String ADD = "add";
     private static final String UPDATE = "update/id";
