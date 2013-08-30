@@ -4,3 +4,10 @@ target
 *.iml
 */workspace.xml
 *.iws
+**/*/ant.xml
+**/*/compiler.xml
+.idea/ant.xml
+.idea/compiler.xml
+dusk-integration.iml
+**/*/profiles_settings.xml
+**/*/project_Default.xml
