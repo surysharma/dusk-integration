@@ -11,3 +11,5 @@ target
 dusk-integration.iml
 **/*/profiles_settings.xml
 **/*/project_Default.xml
+**/*/.DS_Store
+.DS_Store
