@@ -7,19 +7,14 @@
 
     <display-name>hedgebenefits</display-name>
     <description/>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/**/applicationContext.xml</param-value>
-    </context-param>
     <servlet>
         <servlet-name>hedgebenefits</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/**/hedgebenefits-context.xml /WEB-INF/**/hedgebenefits-dataaccess.xml</param-value>
+        </init-param>
     </servlet>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
     <servlet-mapping>
         <servlet-name>hedgebenefits</servlet-name>
         <url-pattern>/</url-pattern>
