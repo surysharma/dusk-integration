@@ -20,3 +20,10 @@ Feature: This features shows scenarios for admin login
   Examples:
     | username | password |
     | admin    | test     |
+
+
+  Scenario: The logged-in user should not not see login page again
+    Given the User is on Admin page
+    And the User is already logged in
+    When the User clicks on the "Company Home" link
+    Then the User successfully goes to the company home page

@@ -8,6 +8,6 @@
 
     <context:annotation-config/>
 
-    <import resource="classpath*:hedgebenefits-context.xml"/>
+    <import resource="classpath*:com/hedgebenefits/context/hedgebenefits-context.xml"/>
 
 </beans>

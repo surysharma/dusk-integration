@@ -59,4 +59,11 @@ public class LoginStepDefs {
     public void the_User_successfully_goes_to_the_company_home_page() throws Throwable {
         throw new PendingException();
     }
+
+    @And("^the User is already logged in$")
+    public void logged_in_user() throws Throwable {
+        throw new PendingException();
+    }
+
+
 }
