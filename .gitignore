@@ -2,7 +2,6 @@ target
 */.idea
 **/*/.idea
 *.iml
-*/workspace.xml
 *.iws
 **/*/ant.xml
 **/*/compiler.xml
