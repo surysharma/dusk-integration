@@ -8,16 +8,11 @@ public class LoginPage extends AbstractWebPage {
     private WebDriver driver;
 
     private LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         Assertions.assertThat(driver.getTitle()).isEqualTo("Login");
     }
 
     public static LoginPage loginPage(WebDriver driver) {
         return new LoginPage(driver);
-    }
-
-    @Override
-    WebDriver driver() {
-        return driver;
     }
 }
