@@ -1,7 +1,9 @@
-package com.hedgebenefits.web.controllers.admin;
+package com.hedgebenefits.web.controllers.admin.registration;
 
 import com.hedgebenefits.domain.Admin;
 import com.hedgebenefits.validators.AdminValidator;
+import com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,7 +35,7 @@ public class AdminRegistrationControllerTest {
     SessionStatus sessionStatus;
     @Mock
     private AdminValidator adminValidator;
-    
+
     @InjectMocks
     private AdminRegistrationController adminRegistrationController = new AdminRegistrationController();
 
@@ -77,15 +79,13 @@ public class AdminRegistrationControllerTest {
         String registeredView = adminRegistrationController.register(admin, bindingResult, sessionStatus, redirectAttributes);
 
         //then
-        assertThat(registeredView, is(ADMIN_VIEWS.REGISTER_ADMIN.getViewName()));
+        assertThat(registeredView, CoreMatchers.is(ADMIN_VIEWS.REGISTER_ADMIN.getViewName()));
         //And
         verify(redirectAttributes).addFlashAttribute("admin", admin);
     }
 
     @Test
     public void shouldListRegisteredAdmins() {
-        //given
-
         //when
         ModelAndView listModelAndView = adminRegistrationController.listRegisteredAdmins();
 

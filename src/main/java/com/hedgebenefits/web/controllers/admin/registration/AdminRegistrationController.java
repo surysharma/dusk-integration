@@ -1,9 +1,10 @@
-package com.hedgebenefits.web.controllers.admin;
+package com.hedgebenefits.web.controllers.admin.registration;
 
 import com.hedgebenefits.domain.Admin;
 import com.hedgebenefits.domain.Right;
 import com.hedgebenefits.propertyeditors.RightsPropertyEditor;
 import com.hedgebenefits.validators.AdminValidator;
+import com.hedgebenefits.web.controllers.admin.ADMIN_RIGHTS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,13 +21,6 @@ import java.util.Map;
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.LIST_ADMINS;
 import static com.hedgebenefits.web.controllers.admin.ADMIN_VIEWS.REGISTER_ADMIN;
 
-/**
- * Created by IntelliJ IDEA.
- * User: sureshsharma
- * Date: 30/05/2012
- * Time: 19:54
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 @RequestMapping(value = "/admin")
 @SessionAttributes(value = "admin")
@@ -44,31 +38,31 @@ public class AdminRegistrationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@Valid @ModelAttribute("admin") Admin admin, BindingResult bindingResult,
-                                 SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
+                           SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("admin", admin);
-        redirectAttributes.addFlashAttribute("isRedirected", true);//In case the redirection does not happen this will never be set!!!
+        redirectAttributes.addFlashAttribute("isRedirected", true);
         validator.validate(admin, bindingResult);
         if (bindingResult.hasErrors()) {
             return REGISTER_ADMIN.getViewName();
-            
+
         }
         sessionStatus.setComplete();
         return "redirect:list";
     }
 
     @ModelAttribute("rights")
-    public Map<ADMIN_RIGHTS, String> populateRights(){
+    public Map<ADMIN_RIGHTS, String> populateRights() {
         Map<ADMIN_RIGHTS, String> rights = new LinkedHashMap<ADMIN_RIGHTS, String>();
         rights.put(ADMIN_RIGHTS.ADMIN, "administrator");
-        rights.put(ADMIN_RIGHTS.COMP,"company");
-        rights.put(ADMIN_RIGHTS.EMP,"Employee");
+        rights.put(ADMIN_RIGHTS.COMP, "company");
+        rights.put(ADMIN_RIGHTS.EMP, "Employee");
 
         return rights;
     }
 
     @RequestMapping(value = "/list")
     public ModelAndView listRegisteredAdmins() {
-        return new ModelAndView(LIST_ADMINS.getViewName());  //To change body of created methods use File | Settings | File Templates.
+        return new ModelAndView(LIST_ADMINS.getViewName());
     }
 
     @InitBinder

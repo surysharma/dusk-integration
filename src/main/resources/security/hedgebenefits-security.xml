@@ -10,7 +10,7 @@
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
-                <security:user name="admin" authorities="ROLE_USER" password="test"/>
+                <security:user name="a" authorities="ROLE_USER" password="a"/>
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
@@ -18,6 +18,8 @@
     <!-- This would add login screen -->
     <security:http auto-config="true">
         <security:intercept-url pattern="/admin/*" access="ROLE_USER"/>
+        <security:intercept-url pattern="/home" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <security:form-login login-page="/login" default-target-url="/home" authentication-failure-url="/loginfailed"/>
     </security:http>
 
 </beans>

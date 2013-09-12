@@ -6,13 +6,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractWebPage {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
-    public AbstractWebPage(WebDriver driver) {
+    public AbstractWebPage(WebDriver driver, String title) {
         this.driver = driver;
+        assertThat(driver.getTitle()).isEqualTo(title);
     }
 
     public void clickOn(String linkName) {
