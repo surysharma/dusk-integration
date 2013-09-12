@@ -16,7 +16,7 @@
 <body>
 <form action="<c:url value="j_spring_security_check"/>" method="POST">
     <table>
-        <c:if test="${authFailed == true}">
+        <c:if test="${AUTHENTICATION_FAIL.name == 'AUTHENTICATION_FAIL'}">
             <td class="error">Invalid Username/Password</td>
         </c:if>
     </table>

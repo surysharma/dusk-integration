@@ -20,6 +20,7 @@
         <security:intercept-url pattern="/admin/*" access="ROLE_USER"/>
         <security:intercept-url pattern="/home" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <security:form-login login-page="/login" default-target-url="/home" authentication-failure-url="/loginfailed"/>
+        <security:logout logout-success-url="/home"/>
     </security:http>
 
 </beans>

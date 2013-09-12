@@ -4,6 +4,7 @@
     <title>Company Home</title>
 </head>
 <body>
+<%@include file="/WEB-INF/jsp/wrappers/header.jspf" %>
 <p>Company Home</p>
 
 <p>

@@ -2,6 +2,7 @@ package com.hedgebenefits.web.controllers.admin;
 
 
 import com.hedgebenefits.utils.ModelConstants;
+import com.hedgebenefits.utils.View;
 import com.hedgebenefits.web.controllers.admin.authentication.LoginController;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -18,7 +19,8 @@ public class LoginControllerTest {
         ModelAndView modelAndView = loginController.renderLogin();
 
         // then
-        Assertions.assertThat(modelAndView.getViewName()).isEqualTo("login");
+        Assertions.assertThat(modelAndView.getViewName()).isEqualTo(View.login.value());
+        Assertions.assertThat(modelAndView.getModelMap().get(ModelConstants.LOGGED_IN.name())).isEqualTo(ModelConstants.LOGGED_IN);
     }
 
     @Test
@@ -30,7 +32,7 @@ public class LoginControllerTest {
         String viewName = loginController.authenticationFailed(modelMap);
 
         // then
-        Assertions.assertThat(viewName).isEqualTo("login");
-        Assertions.assertThat(modelMap.get(ModelConstants.AUTHENTICATION_FAIL.value())).isEqualTo(true);
+        Assertions.assertThat(viewName).isEqualTo(View.login.value());
+        Assertions.assertThat(modelMap.get(ModelConstants.AUTHENTICATION_FAIL.name())).isEqualTo(ModelConstants.AUTHENTICATION_FAIL);
     }
 }

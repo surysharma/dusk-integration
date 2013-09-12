@@ -1,12 +1,13 @@
 package com.hedgebenefits.cucumber;
 
 import com.hedgebenefits.cucumber.utils.StepDefConstant;
-import cucumber.api.PendingException;
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import static com.hedgebenefits.cucumber.pageobjects.HomePage.adminPage;
 import static com.hedgebenefits.cucumber.pageobjects.LoginPage.loginPage;
 import static com.hedgebenefits.cucumber.pageobjects.company.CompanyHomePage.companyHomePage;
-import static java.lang.String.format;
 
 @ContextConfiguration("classpath*:cucumber.xml")
 public class LoginStepDefs {
@@ -24,7 +24,7 @@ public class LoginStepDefs {
 
     @Given("^the User is on Hedge benefits page$")
     public void admin_page() {
-        driver.get(format(StepDefConstant.BASE_URL.value(), ""));
+        driver.get(StepDefConstant.BASE_URL.value());
     }
 
     @And("^the User clicks on the \"(\\w+\\s\\w+)\" link$")
@@ -60,8 +60,16 @@ public class LoginStepDefs {
         companyHomePage(driver);
     }
 
-    @And("^the User is already logged in$")
-    public void logged_in_user() throws Throwable {
-        throw new PendingException();
+    @And("^the User is already logged in with following credentials$")
+    public void logged_in_user(DataTable dataTable) throws Throwable {
+        String username = dataTable.asMaps().get(0).get("username");
+        String password = dataTable.asMaps().get(0).get("password");
+        driver.get(StepDefConstant.BASE_URL.buildCompleteUrlWith("/login"));
+        loginPage(driver).authenticateWith(username, password).andGo();
+    }
+
+    @And("^the User should be able to see the \"(\\w+)\" link$")
+    public void see_the_link(String link) throws Throwable {
+        Assertions.assertThat(driver.findElement(By.linkText(link)).isDisplayed()).isTrue();
     }
 }
