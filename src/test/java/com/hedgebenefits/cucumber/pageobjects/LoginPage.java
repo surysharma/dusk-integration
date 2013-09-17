@@ -6,13 +6,16 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends AbstractWebPage {
 
+    private static LoginPage loginPage;
+
     private LoginPage(WebDriver driver) {
         super(driver, "Login");
         Assertions.assertThat(driver.getTitle()).isEqualTo("Login");
     }
 
     public static LoginPage loginPage(WebDriver driver) {
-        return new LoginPage(driver);
+        loginPage = new LoginPage(driver);
+        return loginPage;
     }
 
     public LoginPage authenticateWith(String userName, String password) {

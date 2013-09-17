@@ -26,7 +26,7 @@ public abstract class AbstractWebPage {
         try {
             driver.findElement(By.linkText(linkName)).click();
         } catch (NoSuchElementException exception) {
-            Assert.fail(format("Link %s does not exist", linkName));
+            Assert.fail(format("Link '%s' does not exist", linkName));
         }
     }
 }

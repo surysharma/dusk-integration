@@ -9,7 +9,7 @@ public class CompanyHomePage extends AbstractWebPage {
         super(driver, "Company Home");
     }
 
-    public static void companyHomePage(WebDriver driver) {
-        new CompanyHomePage(driver);
+    public static CompanyHomePage companyHomePage(WebDriver driver) {
+        return new CompanyHomePage(driver);
     }
 }

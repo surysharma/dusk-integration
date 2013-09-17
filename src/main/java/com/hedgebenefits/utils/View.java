@@ -5,7 +5,8 @@ public enum View {
     login("login"),
     welcome("welcome"),
     datain("company/datain"),
-    home("welcome");
+    home("welcome"),
+    uploadStatus("company/uploadstatus");
 
     private String value;
 
