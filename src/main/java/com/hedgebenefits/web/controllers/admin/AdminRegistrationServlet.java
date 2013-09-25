@@ -17,7 +17,7 @@ import java.util.Arrays;
 
 import static com.hedgebenefits.util.HibernateUtils.sessionFactory;
 
-public class AdminRegistrationServlet extends HttpServlet{
+public class AdminRegistrationServlet extends HttpServlet {
 
 
     private static final String SESSION_FACTORY = "sessionFactory";
@@ -31,8 +31,8 @@ public class AdminRegistrationServlet extends HttpServlet{
     }
 
     @Override
-     public void doGet(HttpServletRequest req, HttpServletResponse resp)
-	throws ServletException, IOException{
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         Session session = getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Admin admin = new Admin();
@@ -56,14 +56,14 @@ public class AdminRegistrationServlet extends HttpServlet{
     }
 
     @Override
-     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-	throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         System.out.println("Post here");
         SessionFactory sf = getSessionFactory();
         Session session = sf.getCurrentSession();
         session.beginTransaction();
         String id = req.getParameter("id");
-        Admin admin = (Admin) session.load(Admin.class, Long.valueOf(id));
+        Admin admin = (Admin) session.get(Admin.class, Long.valueOf(id));
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
         req.getSession().setAttribute("admin", admin);
